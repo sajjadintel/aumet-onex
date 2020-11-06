@@ -1,0 +1,27 @@
+.login.login-3 .login-aside {
+    width: 100%;
+    max-width: 37% !important;
+}
+
+.login.login-3 .login-content .login-form {
+    width: 100%;
+    max-width: 600px;
+}
+
+.hide-mobile {
+    display: initial;
+}
+
+.show-mobile {
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+
+    .show-mobile {
+        display: initial !important;
+    }
+}
