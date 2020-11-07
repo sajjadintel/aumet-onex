@@ -11,3 +11,4 @@ composer.pharsendgrid.env
 composer.lock
 .env
 .run# Created by .ignore support plugin (hsz.mobi)
+.idea/aumet-onex.iml
