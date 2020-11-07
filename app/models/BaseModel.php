@@ -41,6 +41,23 @@ class BaseModel extends DB\SQL\Mapper
         return $this->query;
     }
 
+    function mapArrayToObject($array, &$obj)
+    {
+        foreach ($array as $key => $value)
+        {
+            if (is_array($value))
+            {
+                $obj->$key = new stdClass();
+                mapArrayToObject($value, $obj->$key);
+            }
+            else
+            {
+                $obj->$key = $value;
+            }
+        }
+        return $obj;
+    }
+
     public function findAll($order = false, $limit = 0, $offset = 0)
     {
         $result = null;
@@ -89,7 +106,12 @@ class BaseModel extends DB\SQL\Mapper
             $this->load(array("$name=?", $value));
         }
 
-        return $this->query;
+        if(!$this->dry()) {
+            return BaseModel::toObject($this->query[0]);
+        }
+        else {
+            return null;
+        }
     }
 
     public function getWhere($where, $order = "", $limit = 0, $offset = 0)

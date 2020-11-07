@@ -41,6 +41,62 @@ class AuthController extends Controller
         }
     }
 
+    function postSignInWithFirebase()
+    {
+        $factory = (new Factory)->withServiceAccount($this->getRootDirectory() . '/config/aumet-com-firebase-adminsdk-2nsnx-64efaf5c39.json');
+
+        $auth = $factory->createAuth();
+
+        $idTokenString = $this->f3->get("POST.token");
+
+        try {
+            $verifiedIdToken = $auth->verifyIdToken($idTokenString);
+            $uid = $verifiedIdToken->getClaim('sub');
+            $objFBuser = $auth->getUser($uid);
+
+            global $dbConnectionAuth;
+
+            $dbUser = new BaseModel($dbConnectionAuth, "user");
+            $objSessionUser = $dbUser->getByField("uid", $uid);
+
+            $dbUser->uid = $uid;
+            $dbUser->email = $objFBuser->email;
+            $dbUser->displayName = $objFBuser->displayName;
+            $dbUser->emailVerified = $objFBuser->emailVerified ? 1 : 0;
+            $dbUser->phoneNumber = $objFBuser->phoneNumber;
+            $dbUser->photoUrl = $objFBuser->photoUrl;
+            $dbUser->payload = json_encode($objFBuser);
+
+            if($dbUser->dry()) {
+                $dbUser->statusId = $objFBuser->disabled ? 2 : 1;
+            }
+            else {
+                $dbUser->statusId = $objFBuser->disabled || $dbUser->statusId == 2 ? 2 : 1;
+            }
+
+            $dbUser->save();
+
+            if($dbUser->statusId == 1){
+                $this->setSessionData($objSessionUser, $idTokenString);
+
+                $this->webResponse->setErrorCode(Constants::ERROR_SUCCESS);
+            }
+            else {
+                $auth->revokeRefreshTokens($uid);
+                $this->webResponse->setErrorCode(Constants::ERROR_USER_DISABLED);
+                $this->webResponse->setMessage($this->get("ERROR_USER_DISABLED"));
+            }
+        } catch (\InvalidArgumentException $e) {
+            $this->webResponse->setErrorCode(Constants::ERROR_UNKNOWN);
+            $this->webResponse->setMessage($e->getMessage());
+        } catch (InvalidToken $e) {
+            $this->webResponse->setErrorCode(Constants::ERROR_UNKNOWN);
+            $this->webResponse->setMessage($e->getMessage());
+        }
+
+        echo $this->webResponse->getJSONResponse();
+    }
+
     function getSignOut()
     {
         try {
@@ -65,56 +121,22 @@ class AuthController extends Controller
         $this->rerouteAuth();
     }
 
-    function postSignInWithFirebase()
-    {
-        $factory = (new Factory)->withServiceAccount($this->getRootDirectory() . '/config/aumet-com-firebase-adminsdk-2nsnx-64efaf5c39.json');
+    function setSessionData($objSessionUser, $token){
+        global $dbConnectionAumet;
 
-        $auth = $factory->createAuth();
-
-        $idTokenString = $this->f3->get("POST.token");
-
-        try {
-            $verifiedIdToken = $auth->verifyIdToken($idTokenString);
-            $uid = $verifiedIdToken->getClaim('sub');
-            $objFBuser = $auth->getUser($uid);
-
-            global $dbConnectionAuth;
-
-            $dbUser = new BaseModel($dbConnectionAuth, "user");
-            $dbUser->getByField("uid", $uid);
-
-            $dbUser->uid = $uid;
-            $dbUser->email = $objFBuser->email;
-            $dbUser->displayName = $objFBuser->displayName;
-            $dbUser->emailVerified = $objFBuser->emailVerified ? 1 : 0;
-            $dbUser->phoneNumber = $objFBuser->phoneNumber;
-            $dbUser->photoUrl = $objFBuser->photoUrl;
-            $dbUser->payload = json_encode($objFBuser);
-
-            $dbUser->statusId = $objFBuser->disabled ? 2 : 1;
-
-            $dbUser->save();
-
-            if($dbUser->statusId == 1){
-                $this->f3->set('SESSION.objUser', $objFBuser);
-                $this->f3->set('SESSION.token', $idTokenString);
-
-                $this->webResponse->setErrorCode(Constants::ERROR_SUCCESS);
-            }
-            else {
-                $auth->revokeRefreshTokens($uid);
-                $this->webResponse->setErrorCode(Constants::ERROR_USER_DISABLED);
-                $this->webResponse->setMessage($this->get("ERROR_USER_DISABLED"));
-            }
-        } catch (\InvalidArgumentException $e) {
-            $this->webResponse->setErrorCode(Constants::ERROR_UNKNOWN);
-            $this->webResponse->setMessage($e->getMessage());
-        } catch (InvalidToken $e) {
-            $this->webResponse->setErrorCode(Constants::ERROR_UNKNOWN);
-            $this->webResponse->setMessage($e->getMessage());
+        $dbCountry = new BaseModel($dbConnectionAumet, 'public.countries');
+        $arrCountries = $dbCountry->all("country asc");
+        $arrCountriesSession = [];
+        $htmlSelectCountryOptions="";
+        foreach ($arrCountries as $country) {
+            $arrCountriesSession[] = BaseModel::toObject($country);
+            $htmlSelectCountryOptions .= "<option value='$country->id'>$country->country</option>";
         }
+        $this->f3->set('SESSION.arrCountries', $arrCountriesSession);
+        $this->f3->set('SESSION.htmlSelectCountries', $htmlSelectCountryOptions);
 
-        echo $this->webResponse->getJSONResponse();
+        $this->f3->set('SESSION.token', $token);
+        $this->f3->set('SESSION.objUser', $objSessionUser);
     }
 
     function clearUserSession()
@@ -122,6 +144,8 @@ class AuthController extends Controller
         $this->isAuth = false;
         $this->f3->clear('SESSION.objUser');
         $this->f3->clear('SESSION.token');
+        $this->f3->clear('SESSION.arrCountries');
+        $this->f3->clear('SESSION.htmlSelectCountries');
     }
 
     function postSignUp()

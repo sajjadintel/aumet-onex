@@ -14,7 +14,7 @@
         </div>
     </form>
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-primary btn-lg font-size-h5 font-weight-bolder btn-block col-2 pull-right" onclick="OnBoarding.back()">Back</button>
-    <button type="button" class="btn btn-primary btn-lg font-size-h5 font-weight-bolder btn-block col-2" onclick="OnBoarding.next()">Finish</button>
+<div class="modal-footer d-flex align-content-between">
+    <button type="button" class="btn btn-outline-primary btn-lg font-size-h5 font-weight-bold" onclick="OnBoarding.back()">Back</button>
+    <button type="button" class="btn btn-primary btn-lg font-size-h5 font-weight-bold" onclick="OnBoarding.next()">Finish</button>
 </div>
