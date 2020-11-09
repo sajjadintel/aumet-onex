@@ -24,6 +24,7 @@ function compress_htmlcode($codedata)
          https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-performance.js"></script>
 
     <script>
         // Your web app's Firebase configuration
@@ -41,6 +42,8 @@ function compress_htmlcode($codedata)
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
+
+        var perf = firebase.performance();
     </script>
 
 	<meta charset="utf-8" />
