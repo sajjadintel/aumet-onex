@@ -18,13 +18,16 @@ function compress_htmlcode($codedata)
 
 <head>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-performance.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-messaging.js"></script>
+
+
 
     <script>
         // Your web app's Firebase configuration
@@ -44,6 +47,15 @@ function compress_htmlcode($codedata)
         firebase.analytics();
 
         var perf = firebase.performance();
+
+        // Retrieve Firebase Messaging object.
+        const messaging = firebase.messaging();
+        messaging.getToken({vapidKey: "BAWnIpT8aicmoYRvjyaeTnWjpL1eMoMHEmWYvRmsehUF8JB0_BmM-yVqBK3PTxd2lgl2w8lx59FNlNcCPXswvDM"});
+
+        messaging.onMessage((payload) => {
+            console.log('Message received. ', payload);
+            // ...
+        });
     </script>
 
 	<meta charset="utf-8" />
