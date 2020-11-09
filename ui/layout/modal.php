@@ -1,3 +1,11 @@
+<div class="modal fade" id="modalMDStatic" tabindex="-1" role="dialog" aria-labelledby="modalMDStatic" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content" id="modalMDStaticContent">
+
+        </div>
+    </div>
+</div>
+
 <!-- Modal-->
 <div class="modal fade " id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

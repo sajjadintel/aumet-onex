@@ -196,9 +196,7 @@ class AuthController extends Controller
             $emailTitle = "أهلا بك في نظام النجوم العالمي لتصنيف الخدمات";
 
             $bccEmails = [
-                "alaa@blueoceans.io" => "Alaa Al Atrash",
-                "Ahmed.Shaban@pmo.gov.ae" => "Ahmed Shaban",
-                "Hamda.AlAli@pmo.gov.ae" => "Hamda Al Ali"
+                "a.atrash@aumet.com" => "Alaa Al Atrash"
             ];
 
             $this->f3->set('vEmail_fullname', $dbUser->fullname);
