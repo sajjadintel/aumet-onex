@@ -5,8 +5,8 @@
             <i aria-hidden="true" class="ki ki-close"></i>
         </button>
     </div>
-    <div class="modal-body">
-        <select id="selectTargetedCountries" class="dual-listbox" multiple >
+    <div class="modal-body align-items-stretch">
+        <select id="selectTargetedCountries" class="dual-listbox " multiple >
             <?php echo $_SESSION['htmlSelectCountries']; ?>
         </select>
     </div>

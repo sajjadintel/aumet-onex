@@ -46,9 +46,9 @@
     }
 
     // Class definition
-    var KTDualListbox = function() {
+    var TargetedCountriesSelector = function() {
         // Private functions
-        var demo2 = function () {
+        var _init = function () {
             // Dual Listbox
             var $this = $('#selectTargetedCountries');
 
@@ -72,7 +72,7 @@
         return {
             // public functions
             init: function() {
-                demo2();
+                _init();
             },
         };
     }();
@@ -84,7 +84,7 @@
         //    cssFilterSupport: true,
         //});
 
-        KTDualListbox.init();
+        TargetedCountriesSelector.init();
 
         $("#modalMDStatic").modal("show");
 
