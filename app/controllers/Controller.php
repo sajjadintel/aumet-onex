@@ -11,6 +11,8 @@ class Controller
     protected $objUser;
     protected $language;
 
+    protected $isOnBoarding;
+
     protected $objCompany;
     protected $objCompanyProfile;
     protected $objManufacturer;
@@ -42,6 +44,9 @@ class Controller
         if ($this->objUser && is_object($this->objUser)) {
             $this->isAuth = true;
             $this->f3->set('objUser', $this->objUser);
+
+            $this->isOnBoarding = true;
+            $this->f3->set('isOnBoarding', $this->isOnBoarding);
 
             $this->objCompany = $this->f3->get('SESSION.objCompany');
             $this->f3->set('objCompany', $this->objCompany);
