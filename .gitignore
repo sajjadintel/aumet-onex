@@ -9,6 +9,5 @@ files/
 composer.pharsendgrid.env
 "sendgrid.env"
 composer.lock
-.env
 .run# Created by .ignore support plugin (hsz.mobi)
 .idea/aumet-onex.iml
