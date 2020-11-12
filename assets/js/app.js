@@ -54,14 +54,12 @@ var WebApp = (function () {
 		})
 			.done(function (webResponse) {
 				if (webResponse && typeof webResponse === 'object') {
-					if (webResponse.errorCode == 1) {
+					if (webResponse.errorCode == 0) {
 						if (typeof fnCallback === 'function') {
 							fnCallback(webResponse);
 						}
 						_unblurPage();
 						_unblockPage();
-					} else if (webResponse.errorCode == 0) {
-						window.location.href = '/web';
 					} else {
 						_unblurPage();
 						_unblockPage();
@@ -93,14 +91,12 @@ var WebApp = (function () {
 		})
 			.done(function (webResponse) {
 				if (webResponse && typeof webResponse === 'object') {
-					if (webResponse.errorCode == 1) {
+					if (webResponse.errorCode == 0) {
 						if (typeof fnCallback === 'function') {
 							fnCallback(webResponse);
 						}
 						_unblurPage();
 						_unblockPage();
-					} else if (webResponse.errorCode == 0) {
-						window.location.href = '/';
 					} else {
 						_unblurPage();
 						_unblockPage();

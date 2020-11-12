@@ -19,6 +19,9 @@ class Controller
     protected $objCountry;
     protected $arrProducts;
 
+    protected $arrSuggestedCountries;
+    protected $arrTargetedCountries;
+
     protected $headers;
 
     protected $webResponse;
@@ -45,7 +48,7 @@ class Controller
             $this->isAuth = true;
             $this->f3->set('objUser', $this->objUser);
 
-            $this->isOnBoarding = true;
+            $this->isOnBoarding = false;
             $this->f3->set('isOnBoarding', $this->isOnBoarding);
 
             $this->objCompany = $this->f3->get('SESSION.objCompany');
@@ -62,6 +65,22 @@ class Controller
 
             $this->arrProducts = $this->f3->get('SESSION.arrProducts');
             $this->f3->set('arrProducts', $this->arrProducts);
+
+            $this->arrSuggestedCountries = $this->f3->get('SESSION.arrSuggestedCountries');
+            if(!is_array($this->arrSuggestedCountries)) {
+                $this->arrSuggestedCountries = [];
+                $this->setupSuggestedCountries();
+                $this->f3->set('SESSION.arrSuggestedCountries', $this->arrSuggestedCountries);
+            }
+            $this->f3->set('arrSuggestedCountries', $this->arrSuggestedCountries);
+
+            $this->arrTargetedCountries = $this->f3->get('SESSION.arrTargetedCountries');
+
+            if(!is_array($this->arrTargetedCountries)) {
+                $this->arrTargetedCountries = [];
+                $this->f3->set('SESSION.arrTargetedCountries', $this->arrTargetedCountries);
+            }
+            $this->f3->set('arrTargetedCountries', $this->arrTargetedCountries);
         } else {
             $this->isAuth = false;
         }
@@ -74,6 +93,37 @@ class Controller
         if (!$this->isAuth) {
             $this->rerouteAuth();
         }
+    }
+
+    function setupSuggestedCountries(){
+
+        $this->arrSuggestedCountries = [];
+
+        $item_1 = new stdClass();
+        $item_1->countryId = 1;
+        $item_1->flag = "260-united-kingdom.svg";
+        $item_1->country = "United Kingdom";
+        $item_1->region = "Europe";
+        $item_1->regionId = 1;
+        $item_1->population = "66.65M";
+        $item_1->potentialDistributors = 15;
+        $item_1->aumetIndicator = 76;
+        $item_1->aumetIndicatorLabel = "success";
+
+        $this->arrSuggestedCountries[$item_1->countryId] = $item_1;
+
+        $item_2 = new stdClass();
+        $item_2->countryId = 2;
+        $item_2->flag = "017-germany.svg";
+        $item_2->country = "Germany";
+        $item_2->region = "Europe";
+        $item_2->regionId = 1;
+        $item_2->population = "83.02M";
+        $item_2->potentialDistributors = 37;
+        $item_2->aumetIndicator = 93;
+        $item_2->aumetIndicatorLabel = "primary";
+
+        $this->arrSuggestedCountries[$item_2->countryId] = $item_2;
     }
 
     function setLanguage($language = false){

@@ -274,6 +274,7 @@ function compress_htmlcode($codedata)
 		var docLang = "<?php echo $LANGUAGE; ?>";
         var _ajaxUrl = "<?php echo $ajaxUrl; ?>";
 		var _id = "<?php echo $objUser->uid ?>";
+        var _isOnBoarding = <?php echo $isOnBoarding ? "true" : "false"; ?>;
 	</script>
 
     <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
@@ -292,9 +293,12 @@ function compress_htmlcode($codedata)
 
         jQuery(document).ready(function () {
             WebApp.init();
+            if(_isOnBoarding) {
+                OnBoarding.init();
+            }
 
-            OnBoarding.init();
         });
+
     </script>
 </body>
 <!--end::Body-->

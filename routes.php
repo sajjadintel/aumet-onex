@@ -1,5 +1,7 @@
 <?php
 
+$f3->route('GET /@language/@page', 'DemoController->getPage');
+
 $f3->route('GET /', 'LandingController->get');
 $f3->route('GET /@language', 'LandingController->get');
 
@@ -17,7 +19,7 @@ $f3->route('POST /@language/onboarding/save', 'OnboardingController->postUserOnb
 $f3->route('GET /@language/me/menu', 'UserController->getMenu');
 $f3->route('GET /@language/me/switchLanguage/@languageTo', 'UserController->switchLanguage');
 
-$f3->route('GET /@language/@page', 'DemoController->getPage');
+
 $f3->route('GET /@language/mysalesnetwork/region/@regionId/distributors', 'DemoController->get_mysalesnetwork_region_distributors');
 $f3->route('GET /@language/mysalesnetwork/region/@regionId/targetedcountries', 'DemoController->get_mysalesnetwork_region_targetedcountries');
 
@@ -29,3 +31,10 @@ $f3->route('GET /@language/demo/set/@companyId', 'DemoController->getSetDemoComp
 $f3->route('POST /@language/demo/setup', 'DemoController->postSetupDemoCompany');
 
 $f3->route('GET /@language/profile/countries/targeted', 'ProfileController->getTargetedCountries');
+
+// Calls
+$f3->route('GET /@language/calls', 'CallController->get');
+$f3->route('GET /@language/potentialdistributors', 'PotentialDistributorController->getWorkspace');
+$f3->route('GET /@language/potentialdistributors/list', 'PotentialDistributorController->getList');
+$f3->route('POST /@language/potentialdistributors/addSuggestedToTargetedCountries', 'PotentialDistributorController->postAddSuggestedToTargetedCountries');
+

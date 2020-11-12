@@ -99,6 +99,8 @@ $f3->set('dbConnStringAuth', "mysql:host=$dbHost;port=$dbPort;dbname=$dbNameAuth
 $f3->set('dbConnStringIndustry', "mysql:host=$dbHost;port=$dbPort;dbname=$dbNameIndustry");
 $f3->set('dbConnStringAumet', "pgsql:host=$dbPGHost;port=$dbPGPort;dbname=$dbNameAumet");
 
+$f3->set('dbConnStringOnEx', "mysql:host=$dbHost;port=$dbPort;dbname=onex");
+
 global $dbConnectionAuth;
 
 $dbConnectionAuth = new DB\SQL(
@@ -126,13 +128,22 @@ $dbConnectionAumet = new DB\SQL(
     array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION)
 );
 
+global $dbConnectionOnEx;
+
+$dbConnectionOnEx = new DB\SQL(
+    $f3->get('dbConnStringOnEx'),
+    $f3->get('dbUsername'),
+    $f3->get('dbPassword'),
+    array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION)
+);
+
 $f3->set('mailHost', 'smtp.sendgrid.net');
 $f3->set('mailUsername', 'apikey');
 $f3->set('mailPassword', getenv('SENDGRID_API_KEY'));
 $f3->set('mailSMTPSecure', 'tls');
 $f3->set('mailPort', 587);
 $f3->set('mailFromName', 'Aumet Inc');
-$f3->set('mailFromEmail', 'no-reply@aumet.tech');
+$f3->set('mailFromEmail', 'no-reply@aumet.com');
 $f3->set('mailBCC', 'a.atrash@aumet.com');
 
 define('CHUNK_SIZE', 1024 * 1024);
