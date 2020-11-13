@@ -7,7 +7,9 @@
     </div>
     <div class="modal-body align-items-stretch">
         <select id="selectTargetedCountries" class="dual-listbox " multiple >
-            <?php echo $_SESSION['htmlSelectCountries']; ?>
+            <?php foreach ($arrCountries as $country): ?>
+                <option value='<?php echo $country->id; ?>'><?php echo $country->name; ?></option>
+            <?php endforeach; ?>
         </select>
     </div>
     <div class="modal-footer">

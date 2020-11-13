@@ -1,5 +1,14 @@
 <?php
 
+$f3->route('GET /resources/@type',
+    function($f3, $args) {
+        $path = $f3->get('UI').$args['type'].'/';
+        $files = preg_replace('/(\.+\/)/','',$_GET['files']); // close potential hacking attempts
+        echo Web::instance()->minify($files, null, true, $path);
+    },
+    3600*24
+);
+
 $f3->route('GET /@language/@page', 'DemoController->getPage');
 
 $f3->route('GET /', 'LandingController->get');

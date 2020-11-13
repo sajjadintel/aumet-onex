@@ -6,7 +6,6 @@ class Controller
     protected $phpMail;
     protected $log;
     protected $audit;
-    protected $cache;
     protected $isAuth;
     protected $objUser;
     protected $language;
@@ -31,11 +30,6 @@ class Controller
         $this->f3 = \Base::instance();
         $this->webResponse = new WebResponse();
 
-        if (getenv('ENV') == Constants::ENV_PROD) {
-            $client = new \Redis();
-            $client->connect('127.0.0.1');
-            $this->cache = new \MatthiasMullie\Scrapbook\Adapters\Redis($client);
-        }
         $this->audit = \Audit::instance();
 
         $this->headers = $this->getHttpHeaders();
@@ -86,6 +80,8 @@ class Controller
         }
 
         $this->f3->set("ajaxUrl", $_SERVER['REQUEST_URI']);
+
+        AumetCache::check();
     }
 
     function beforeroute()
@@ -148,7 +144,7 @@ class Controller
     function rerouteAuth()
     {
         if ($this->f3->ajax()) {
-            echo $this->webResponse->jsonResponse();
+            echo $this->webResponse->getJSONResponse();
         } else {
             $this->f3->reroute("/$this->language/auth/signin");
         }
@@ -157,7 +153,7 @@ class Controller
     function rerouteMemberHome()
     {
         if ($this->f3->ajax()) {
-            echo $this->webResponse->jsonResponse();
+            echo $this->webResponse->getJSONResponse();
         } else {
             $this->f3->reroute("/$this->language");
         }

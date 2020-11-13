@@ -67,10 +67,13 @@ class AuthController extends Controller
             $dbUser->photoUrl = $objFBuser->photoUrl;
             $dbUser->payload = json_encode($objFBuser);
 
+
+
             if($dbUser->dry()) {
                 $dbUser->statusId = $objFBuser->disabled ? 2 : 1;
             }
             else {
+                $dbUser->scopeId=2; // OnEx Default
                 $dbUser->statusId = $objFBuser->disabled || $dbUser->statusId == 2 ? 2 : 1;
             }
 

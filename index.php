@@ -13,6 +13,7 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 date_default_timezone_set("Asia/Dubai");
 
 require_once("vendor/autoload.php");
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
@@ -27,6 +28,11 @@ $f3->set('LOGS', 'logs/');
 $f3->set('LOCALES', 'app/translations/');
 $f3->set('FALLBACK', 'en');
 $f3->set('ENCODING', 'UTF-8');
+
+
+$f3->set('CACHE','redis=localhost');
+
+$f3->set('AUMET_CACHE', FALSE);
 
 $f3->set('rootDIR', dirname(__FILE__));
 
