@@ -7,29 +7,179 @@
                     <h2 class="text-dark font-weight-bolder mr-5 line-height-xl">
                     <span class="svg-icon svg-icon-xxl mr-1">
 						<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
-						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24"/>
-                                <path d="M13.0799676,14.7839934 L15.2839934,12.5799676 C15.8927139,11.9712471 16.0436229,11.0413042 15.6586342,10.2713269 L15.5337539,10.0215663 C15.1487653,9.25158901 15.2996742,8.3216461 15.9083948,7.71292558 L18.6411989,4.98012149 C18.836461,4.78485934 19.1530435,4.78485934 19.3483056,4.98012149 C19.3863063,5.01812215 19.4179321,5.06200062 19.4419658,5.11006808 L20.5459415,7.31801948 C21.3904962,9.0071287 21.0594452,11.0471565 19.7240871,12.3825146 L13.7252616,18.3813401 C12.2717221,19.8348796 10.1217008,20.3424308 8.17157288,19.6923882 L5.75709327,18.8875616 C5.49512161,18.8002377 5.35354162,18.5170777 5.4408655,18.2551061 C5.46541191,18.1814669 5.50676633,18.114554 5.56165376,18.0596666 L8.21292558,15.4083948 C8.8216461,14.7996742 9.75158901,14.6487653 10.5215663,15.0337539 L10.7713269,15.1586342 C11.5413042,15.5436229 12.4712471,15.3927139 13.0799676,14.7839934 Z" fill="#000000"/>
-                                <path d="M14.1480759,6.00715131 L13.9566988,7.99797396 C12.4781389,7.8558405 11.0097207,8.36895892 9.93933983,9.43933983 C8.8724631,10.5062166 8.35911588,11.9685602 8.49664195,13.4426352 L6.50528978,13.6284215 C6.31304559,11.5678496 7.03283934,9.51741319 8.52512627,8.02512627 C10.0223249,6.52792766 12.0812426,5.80846733 14.1480759,6.00715131 Z M14.4980938,2.02230302 L14.313049,4.01372424 C11.6618299,3.76737046 9.03000738,4.69181803 7.1109127,6.6109127 C5.19447112,8.52735429 4.26985715,11.1545872 4.51274152,13.802405 L2.52110319,13.985098 C2.22450978,10.7517681 3.35562581,7.53777247 5.69669914,5.19669914 C8.04101739,2.85238089 11.2606138,1.72147333 14.4980938,2.02230302 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                            </g>
-                        </svg>
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <rect x="0" y="0" width="24" height="24"></rect> <path d="M8,4 L16,4 C17.1045695,4 18,4.8954305 18,6 L18,17.726765 C18,18.2790497 17.5522847,18.726765 17,18.726765 C16.7498083,18.726765 16.5087052,18.6329798 16.3242754,18.4639191 L12.6757246,15.1194142 C12.2934034,14.7689531 11.7065966,14.7689531 11.3242754,15.1194142 L7.67572463,18.4639191 C7.26860564,18.8371115 6.63603827,18.8096086 6.26284586,18.4024896 C6.09378519,18.2180598 6,17.9769566 6,17.726765 L6,6 C6,4.8954305 6.8954305,4 8,4 Z" fill="#000000"></path> </g></svg>
                         <!--end::Svg Icon-->
 					</span>
-                        Company Profile</h2>
+                        My Company Profile</h2>
                     <span class="font-weight-normal font-size-h6 ml-12">You can find all the calls distributors scheduled with you</span>
                 </div>
             </div>
         </div>
         <div class="d-flex align-items-center">
-            <a href="#" class="btn btn-primary font-weight-bold font-size-base mr-5">Connect your calendar</a>
-            <a href="#" class="btn btn-primary font-weight-bold font-size-base">Edit available time</a>
+            <a href="#" class="btn btn-primary font-weight-bold font-size-base mr-5">Edit Company Profile</a>
         </div>
     </div>
 </div>
 <div class="d-flex flex-column-fluid">
 
-    <div class="container">
+    <div class="container-fluid">
+
+        <div class="card card-custom gutter-b mt-5">
+            <div class="card-body">
+
+                <div class="d-flex mb-9 h-175px mx-n9 mt-n9" style="background-color: #0a6aa1">
+                    test
+                </div>
+                <div class="d-flex mb-9">
+
+                    <div class="flex-shrink-0 mr-7  mt-n20 ">
+                        <div class="symbol symbol-50 symbol-lg-120">
+                            <img src="/theme/assets/media/users/300_1.jpg" alt="image">
+                        </div>
+                        <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
+                            <span class="font-size-h3 symbol-label font-weight-boldest">JM</span>
+                        </div>
+                    </div>
+
+
+                    <div class="flex-grow-1">
+
+                        <div class="d-flex justify-content-between flex-wrap mt-1">
+                            <div class="d-flex mr-3">
+                                <a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">Jason Muller</a>
+                                <a href="#">
+                                    <i class="flaticon2-correct text-success font-size-h5"></i>
+                                </a>
+                            </div>
+                            <div class="my-lg-0 my-3">
+                                <a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">ask</a>
+                                <a href="#" class="btn btn-sm btn-info font-weight-bolder text-uppercase">hire</a>
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex flex-wrap justify-content-between mt-1">
+                            <div class="d-flex flex-column flex-grow-1 pr-8">
+                                <div class="d-flex flex-wrap mb-4">
+                                    <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                                        <i class="flaticon2-new-email mr-2 font-size-lg"></i>jason@siastudio.com</a>
+                                    <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                                        <i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>PR Manager</a>
+                                    <a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
+                                        <i class="flaticon2-placeholder mr-2 font-size-lg"></i>Melbourne</a>
+                                </div>
+                                <span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
+                                <span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
+                            </div>
+                            <div class="d-flex align-items-center w-25 flex-fill float-right mt-lg-12 mt-8">
+                                <span class="font-weight-bold text-dark-75">Progress</span>
+                                <div class="progress progress-xs mx-3 w-100">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="font-weight-bolder text-dark">78%</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="separator separator-solid"></div>
+
+                <div class="d-flex align-items-center flex-wrap mt-8">
+
+                    <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+<span class="mr-4">
+<i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
+</span>
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-sm">Earnings</span>
+                            <span class="font-weight-bolder font-size-h5">
+<span class="text-dark-50 font-weight-bold">$</span>249,500</span>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+<span class="mr-4">
+<i class="flaticon-confetti display-4 text-muted font-weight-bold"></i>
+</span>
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-sm">Expenses</span>
+                            <span class="font-weight-bolder font-size-h5">
+<span class="text-dark-50 font-weight-bold">$</span>164,700</span>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+<span class="mr-4">
+<i class="flaticon-pie-chart display-4 text-muted font-weight-bold"></i>
+</span>
+                        <div class="d-flex flex-column text-dark-75">
+                            <span class="font-weight-bolder font-size-sm">Net</span>
+                            <span class="font-weight-bolder font-size-h5">
+<span class="text-dark-50 font-weight-bold">$</span>782,300</span>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+<span class="mr-4">
+<i class="flaticon-file-2 display-4 text-muted font-weight-bold"></i>
+</span>
+                        <div class="d-flex flex-column flex-lg-fill">
+                            <span class="text-dark-75 font-weight-bolder font-size-sm">73 Tasks</span>
+                            <a href="#" class="text-primary font-weight-bolder">View</a>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+<span class="mr-4">
+<i class="flaticon-chat-1 display-4 text-muted font-weight-bold"></i>
+</span>
+                        <div class="d-flex flex-column">
+                            <span class="text-dark-75 font-weight-bolder font-size-sm">648 Comments</span>
+                            <a href="#" class="text-primary font-weight-bolder">View</a>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex align-items-center flex-lg-fill mb-2 float-left">
+<span class="mr-4">
+<i class="flaticon-network display-4 text-muted font-weight-bold"></i>
+</span>
+                        <div class="symbol-group symbol-hover">
+                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Mark Stone">
+                                <img alt="Pic" src="/theme/assets/media/users/300_25.jpg">
+                            </div>
+                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Charlie Stone">
+                                <img alt="Pic" src="/theme/assets/media/users/300_19.jpg">
+                            </div>
+                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Luca Doncic">
+                                <img alt="Pic" src="/theme/assets/media/users/300_22.jpg">
+                            </div>
+                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Nick Mana">
+                                <img alt="Pic" src="/theme/assets/media/users/300_23.jpg">
+                            </div>
+                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Teresa Fox">
+                                <img alt="Pic" src="/theme/assets/media/users/300_18.jpg">
+                            </div>
+                            <div class="symbol symbol-30 symbol-circle symbol-light">
+                                <span class="symbol-label font-weight-bold">5+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="px-30">
+
+
 
         <div class="d-flex flex-row">
 
@@ -870,6 +1020,7 @@
             </div>
 
         </div>
+    </div>
 
     </div>
 

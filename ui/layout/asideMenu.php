@@ -116,7 +116,7 @@
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             <li class="menu-item" aria-haspopup="true">
-                <a href="javascript:;" class="menu-link" onclick="WebApp.loadPage('myprofile')">
+                <a href="javascript:;" class="menu-link" onclick="WebApp.loadPage('mycompanyprofile')">
 					<span class="svg-icon menu-icon">
 						<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -127,7 +127,7 @@
 </svg>
                         <!--end::Svg Icon-->
 					</span>
-                    <span class="menu-text font-size-h6">My Profile</span>
+                    <span class="menu-text font-size-h6">My Company Profile</span>
                 </a>
             </li>
             <li class="menu-item" aria-haspopup="true">

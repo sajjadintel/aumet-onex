@@ -47,3 +47,5 @@ $f3->route('GET /@language/potentialdistributors', 'PotentialDistributorControll
 $f3->route('GET /@language/potentialdistributors/list', 'PotentialDistributorController->getList');
 $f3->route('POST /@language/potentialdistributors/addSuggestedToTargetedCountries', 'PotentialDistributorController->postAddSuggestedToTargetedCountries');
 
+$f3->route('GET /@language/mycompanyprofile', 'EntityController->getEntityProfile');
+
