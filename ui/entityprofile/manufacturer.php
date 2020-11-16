@@ -484,6 +484,65 @@
 
             <div class="flex-row-fluid ml-lg-8">
 
+                <div class="card card-custom gutter-b">
+
+                    <div class="card-header border-0 py-5">
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label font-weight-bolder text-dark">Products Range</span>
+                            <span class="text-muted mt-3 font-weight-bold font-size-sm"></span>
+                        </h3>
+                        <div class="card-toolbar">
+
+                        </div>
+                    </div>
+
+
+                    <div class="card-body pt-0 pb-3">
+
+                        <div>
+
+                            <?php $counter = 0; ?>
+                            <?php foreach ($arrProducts as $objProduct): ?>
+
+                                <div class="d-flex align-items-center mb-8">
+
+                                    <div class="symbol mr-5 pt-1">
+                                        <div class="symbol-label min-w-100px min-h-100px" style="background-image: url('<?php echo $objProduct->baseImage ?>')"></div>
+                                    </div>
+
+
+                                    <div class="d-flex flex-column">
+
+                                        <a href="#" class="text-primary font-weight-bolder text-hover-primary font-size-lg mb-4"><?php echo $objProduct->productTitle ?></a>
+
+
+                                        <span class="text-dark-75 font-weight-bold font-size-sm pb-4"><?php echo $objProduct->productSubtitle ?>
+<br>Darius greatness</span>
+
+
+                                        <div>
+                                            <button type="button" class="btn btn-light font-weight-bolder font-size-sm py-2">Book Now</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <?php
+                                $counter++;
+                                if($counter > 4) {
+                                    break;
+                                }
+                                ?>
+                            <?php endforeach; ?>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
                 <div class="row">
                     <div class="col-lg-6">
 
@@ -821,66 +880,6 @@
 
 
                     </div>
-                </div>
-
-
-                <div class="card card-custom gutter-b">
-
-                    <div class="card-header border-0 py-5">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label font-weight-bolder text-dark">Products Range</span>
-                            <span class="text-muted mt-3 font-weight-bold font-size-sm"></span>
-                        </h3>
-                        <div class="card-toolbar">
-
-                        </div>
-                    </div>
-
-
-                    <div class="card-body pt-0 pb-3">
-
-                        <div>
-
-                            <?php $counter = 0; ?>
-                            <?php foreach ($arrProducts as $objProduct): ?>
-
-                            <div class="d-flex align-items-center mb-8">
-
-                                <div class="symbol mr-5 pt-1">
-                                    <div class="symbol-label min-w-100px min-h-100px" style="background-image: url('<?php echo $objProduct->baseImage ?>')"></div>
-                                </div>
-
-
-                                <div class="d-flex flex-column">
-
-                                    <a href="#" class="text-primary font-weight-bolder text-hover-primary font-size-lg mb-4"><?php echo $objProduct->productTitle ?></a>
-
-
-                                    <span class="text-dark-75 font-weight-bold font-size-sm pb-4"><?php echo $objProduct->productSubtitle ?>
-<br>Darius greatness</span>
-
-
-                                    <div>
-                                        <button type="button" class="btn btn-light font-weight-bolder font-size-sm py-2">Book Now</button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                                <?php
-                                $counter++;
-                                if($counter > 4) {
-                                    break;
-                                }
-                                ?>
-                            <?php endforeach; ?>
-
-                        </div>
-
-                    </div>
-
                 </div>
 
             </div>
