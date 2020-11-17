@@ -39,7 +39,7 @@
                     <div class="card-header border-0">
                         <h3 class="card-title font-weight-bolder text-dark">Suggested Countries</h3>
                     </div>
-                    <div class="card-body pt-2">
+                    <div class="card-body">
                         <?php foreach ($arrSuggestedCountries as $country): ?>
                         <div class="d-flex align-items-center mb-10">
 

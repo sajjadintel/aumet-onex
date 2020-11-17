@@ -65,8 +65,30 @@ class PotentialDistributorController extends Controller
         ['id'=> 8, 'region'=> "Asia", 'eDistributors'=> 5, 'tCountries'=> 0, 'pDistributors'=> 0]
         ];
 
-        $this->webResponse->setData($arrRegions);
+        global $dbConnectionAumet;
+
+        $arrCountryIds = [1,2,3,4,5,6,7];
+
+        foreach ($this->arrTargetedCountries as $key => $obj) {
+            //$arrCountryIds[] = $key;
+        }
+
+        $vwRegionCountryDistributorCount = new BaseModel($dbConnectionAumet, 'onex.vwRegionCountryDistributorCount');
+        $arrTemp = $vwRegionCountryDistributorCount->getWhere('"CountryID" in (' . implode(',',$arrCountryIds).')');
+        $arrRegionCountryDistributorCount = [];
+        $arrRegions = [];
+        foreach ($arrTemp as $objTemp) {
+            $obj = BaseModel::toObject($objTemp);
+            $arrRegionCountryDistributorCount[$objTemp->CountryID] = $obj;
+        }
+        //$this->f3->set('arrRegionCountryDistributorCount', $arrRegionCountryDistributorCount);
+
+        $this->webResponse->setData($arrRegionCountryDistributorCount);
 
         echo $this->webResponse->getJSONResponse();
+    }
+
+    function getPotentialDistributorsByCountry(){
+
     }
 }

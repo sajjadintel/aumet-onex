@@ -311,24 +311,12 @@ var KTDatatableChildRemoteDataDemo = function() {
 }();
 
 jQuery(document).ready(function() {
-    KTDatatableChildRemoteDataDemo.init();
+    //KTDatatableChildRemoteDataDemo.init();
 });
 
 var KTDatatableMySalesNetwork = function() {
     // Private functions
-
-    // demo initializer
     var _init = function() {
-        let dataJSONArray = [
-            {id: 1, region: "Europe", eDistributors: 5, tCountries: 0, pDistributors: 0},
-            {id: 2, region: "North America", eDistributors: 5, tCountries: 0, pDistributors: 0},
-            {id: 3, region: "Latin America", eDistributors: 5, tCountries: 0, pDistributors: 0},
-            {id: 4, region: "Western Europe", eDistributors: 5, tCountries: 0, pDistributors: 0},
-            {id: 5, region: "Central and Eastern Europe", eDistributors: 5, tCountries: 0, pDistributors: 0},
-            {id: 6, region: "Africa", eDistributors: 5, tCountries: 0, pDistributors: 0},
-            {id: 7, region: "Middle East", eDistributors: 5, tCountries: 0, pDistributors: 0},
-            {id: 8, region: "Asia", eDistributors: 5, tCountries: 0, pDistributors: 0},
-        ];
         var datatable = $('#kt_datatable').KTDatatable({
             // datasource definition
             data: {
@@ -364,44 +352,32 @@ var KTDatatableMySalesNetwork = function() {
 
             // column sorting
             sortable: true,
-
             pagination: true,
-
             // columns definition
             columns: [{
-                field: 'id',
-                title: '#',
-                sortable: false,
-                width: 20,
-                type: 'number',
-                textAlign: 'center',
+                field: 'RegionName',
+                autoHide: false,
+                title: 'Region'
             }, {
-                field: 'region',
-                title: 'Region',
-                template: function(row) {
-                    return row.region;
-                },
-            }, {
-                field: 'eDistributors',
-                title: 'Existing Distributors',
+                field: 'CountryName',
+                title: 'Country',
+                autoHide: false,
                 type: 'number'
             }, {
-                field: 'tCountries',
-                title: 'Targeted Countries',
-                type: 'number'
-            }, {
-                field: 'pDistributors',
+                field: 'DistributorsCount',
                 title: 'Potential Distributors',
+                autoHide: false,
                 type: 'number'
             }, {
                 field: 'Actions',
                 title: 'Actions',
                 sortable: false,
-                width: 125,
-                overflow: 'visible',
+                width: 250,
+
                 autoHide: false,
                 template: function(row) {
-                    return '<a href="javascript:;" class="btn btn-sm btn-primary" title="View" onclick="WebApp.loadPage(\'mysalesnetwork/region/'+row.id+'/distributors\')">\
+                    return '<a href="javascript:;" class="btn btn-sm btn-outline-primary " title="Remove" onclick="WebApp.loadPage(\'potentialdistributors/country/'+row.CountryId+'\')">Remove</a>\
+							<a href="javascript:;" class="btn btn-sm btn-primary" title="View" onclick="WebApp.loadPage(\'potentialdistributors/country/'+row.CountryId+'\')">\
 	                            <span class="svg-icon svg-icon-md">\
 	                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
@@ -412,7 +388,7 @@ var KTDatatableMySalesNetwork = function() {
     </g>\
 </svg>\
 	                            </span>\
-							View</a>\
+							View Distributors</a>\
 						';
                 },
             }],
