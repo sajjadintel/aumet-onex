@@ -48,18 +48,21 @@
                 <div class="card card-custom gutter-b">
                     <div class="card-header">
                         <div class="card-title py-3">
-                            <div class="symbol symbol-90 mr-3">
-                                <img alt="Pic" src="<?php echo $objCompany->Logo != null ? $objCompany->Logo : "/theme/assets/media/users/default.jpg"?>"/>
+
+                            <div class="image-input image-input-empty image-input-outline mr-5" id="kt_user_edit_avatar" style="background-image: url('<?php echo $objCompany->Logo != null ? $objCompany->Logo : "/theme/assets/media/users/default.jpg"?>')">
+                                <div class="image-input-wrapper"></div>
                             </div>
+
+
                             <div class="card-label">
-                                <h3><?php echo $objCompany->Name?> <i class="flaticon-medal text-warning icon-2x"></i></h3>
-                                <h4 class="mt-4"><?php echo $objCountry->country?>
+                                <span class="font-size-h5"><?php echo $objCompany->Name?></span>
+                                <div class="mt-4 font-size-h6"><?php echo $objCountry->country?>
                                     <?php if($objCountry->flag != ""): ?>
                                     <div class="symbol symbol-20 ml-2">
                                         <img alt="Pic" src="/theme/assets/media/svg/flags/<?php echo $objCountry->flag?>">
                                     </div>
                                     <?php endif; ?>
-                                </h4>
+                                </div>
                             </div>
                         </div>
                         <div class="card-toolbar">
@@ -69,12 +72,10 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-3">
-                                <div class="card card-custom bg-primary card-stretch gutter-b">
-                                    <!--begin::Body-->
-                                    <div class="card-body">
-                                        <span class="svg-icon svg-icon-xl-3x svg-icon-lg-3x svg-icon-md-2x svg-icon-sm-1x svg-icon-white">
+                        <div class="card-spacer">
+                            <div class="row m-0">
+                                <div class="col bg-warning px-6 py-4 rounded-xl mr-7 mb-7">
+                                    <span class="svg-icon svg-icon-xl-3x svg-icon-lg-3x svg-icon-md-2x svg-icon-sm-1x svg-icon-white">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -91,20 +92,13 @@
                                                           rx="1.5"></rect>
                                                 </g>
                                             </svg>
-                                            <!--end::Svg Icon-->
+                                        <!--end::Svg Icon-->
                                         </span>
-                                        <span class="card-title font-weight-bolder text-white font-size-h3 mb-0 mt-6 d-block">145,932</span>
-                                        <span class="font-weight-bold text-white font-size-h4">Unique Visitor</span>
-                                    </div>
-                                    <!--end::Body-->
+                                    <span class="card-title font-weight-bolder text-white font-size-h3 mb-0 mt-6 d-block">145,932</span>
+                                    <span class="font-weight-bold text-white font-size-h6">Unique Visitor</span>
                                 </div>
-                            </div>
-
-                            <div class="col-3">
-                                <div class="card card-custom bg-warning card-stretch gutter-b">
-                                    <!--begin::Body-->
-                                    <div class="card-body">
-                                        <span class="svg-icon svg-icon-xl-3x svg-icon-lg-3x svg-icon-md-2x svg-icon-sm-1x svg-icon-white">
+                                <div class="col bg-primary px-6 py-4 rounded-xl mb-7">
+                                    <span class="svg-icon svg-icon-xl-3x svg-icon-lg-3x svg-icon-md-2x svg-icon-sm-1x svg-icon-white">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -117,20 +111,15 @@
                                                           fill="#000000" fill-rule="nonzero" opacity="0.3"/>
                                                 </g>
                                             </svg>
-                                            <!--end::Svg Icon-->
+                                        <!--end::Svg Icon-->
                                         </span>
-                                        <span class="card-title font-weight-bolder text-white font-size-h3 mb-0 mt-6 d-block">349,600</span>
-                                        <span class="font-weight-bold text-white font-size-h4">Profile Visits</span>
-                                    </div>
-                                    <!--end::Body-->
+                                    <span class="card-title font-weight-bolder text-white font-size-h3 mb-0 mt-6 d-block">349,600</span>
+                                    <span class="font-weight-bold text-white font-size-h6">Profile Visits</span>
                                 </div>
                             </div>
-
-                            <div class="col-3">
-                                <div class="card card-custom bg-danger card-stretch gutter-b">
-                                    <!--begin::Body-->
-                                    <div class="card-body">
-                                        <span class="svg-icon svg-icon-xl-3x svg-icon-lg-3x svg-icon-md-2x svg-icon-sm-1x svg-icon-white">
+                            <div class="row m-0">
+                                <div class="col bg-danger px-6 py-4 rounded-xl mr-7">
+                                    <span class="svg-icon svg-icon-xl-3x svg-icon-lg-3x svg-icon-md-2x svg-icon-sm-1x svg-icon-white">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -144,20 +133,13 @@
                                                           transform="translate(15.536799, 8.287129) scale(-1, 1) translate(-15.536799, -8.287129) "/>
                                                 </g>
                                             </svg>
-                                            <!--end::Svg Icon-->
+                                        <!--end::Svg Icon-->
                                         </span>
-                                        <span class="card-title font-weight-bolder text-white font-size-h3 mb-0 mt-6 d-block">125,987</span>
-                                        <span class="font-weight-bold text-white font-size-h4">Product Visits</span>
-                                    </div>
-                                    <!--end::Body-->
+                                    <span class="card-title font-weight-bolder text-white font-size-h3 mb-0 mt-6 d-block">125,987</span>
+                                    <span class="font-weight-bold text-white font-size-h6">Product Visits</span>
                                 </div>
-                            </div>
-
-                            <div class="col-3">
-                                <div class="card card-custom bg-success card-stretch gutter-b">
-                                    <!--begin::Body-->
-                                    <div class="card-body">
-                                        <span class="svg-icon svg-icon-xl-3x svg-icon-lg-3x svg-icon-md-2x svg-icon-sm-1x svg-icon-white">
+                                <div class="col bg-success px-6 py-4 rounded-xl">
+                                    <span class="svg-icon svg-icon-xl-3x svg-icon-lg-3x svg-icon-md-2x svg-icon-sm-1x svg-icon-white">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -172,14 +154,10 @@
                                             </svg
                                                     <!--end::Svg Icon-->
                                         </span>
-                                        <span class="card-title font-weight-bolder text-white font-size-h3 mb-0 mt-6 d-block">50,623</span>
-                                        <span class="font-weight-bold text-white font-size-h4">Catalogue Visits</span>
-                                    </div>
-                                    <!--end::Body-->
+                                    <span class="card-title font-weight-bolder text-white font-size-h3 mb-0 mt-6 d-block">50,623</span>
+                                    <span class="font-weight-bold text-white font-size-h6">Catalogue Visits</span>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>

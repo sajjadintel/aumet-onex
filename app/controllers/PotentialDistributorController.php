@@ -51,4 +51,22 @@ class PotentialDistributorController extends Controller
     function getAPIDataTable(){
         
     }
+
+    function getTargetedCountries() {
+
+        $arrRegions = [
+            ['id'=> 1, 'region'=>  "Europe", 'eDistributors'=>  5, 'tCountries'=> 0, 'pDistributors'=> 0],
+            ['id'=> 2, 'region'=> "North America", 'eDistributors'=> 5, 'tCountries'=> 0, 'pDistributors'=> 0],
+        ['id'=> 3, 'region'=> "Latin America", 'eDistributors'=> 5, 'tCountries'=> 0, 'pDistributors'=> 0],
+        ['id'=> 4, 'region'=> "Western Europe", 'eDistributors'=> 5, 'tCountries'=> 0, 'pDistributors'=> 0],
+        ['id'=> 5, 'region'=> "Central and Eastern Europe", 'eDistributors'=> 5, 'tCountries'=> 0, 'pDistributors'=> 0],
+        ['id'=> 6, 'region'=> "Africa", 'eDistributors'=> 5, 'tCountries'=> 0, 'pDistributors'=> 0],
+        ['id'=> 7, 'region'=> "Middle East", 'eDistributors'=> 5, 'tCountries'=> 0, 'pDistributors'=> 0],
+        ['id'=> 8, 'region'=> "Asia", 'eDistributors'=> 5, 'tCountries'=> 0, 'pDistributors'=> 0]
+        ];
+
+        $this->webResponse->setData($arrRegions);
+
+        echo $this->webResponse->getJSONResponse();
+    }
 }

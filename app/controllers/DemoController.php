@@ -79,14 +79,54 @@ class DemoController extends Controller
 
                 $this->f3->set('SESSION.objCountry', $objCountry);
 
+
+
+                $dbProspectedCompany = new BaseModel($dbConnectionAumet, 'production.ProspectedCompany');
+                $objProspectedCompany = BaseModel::toObject($dbProspectedCompany->getWhere('"ID" = ' . $objCompany->ProspectedCompanyID)[0]);
+                $this->f3->set('SESSION.objProspectedCompany', $objProspectedCompany);
+
+                $dbProspectedCompanyScientificNames = new BaseModel($dbConnectionAumet, 'production.ProspectedCompanyScientificName');
+                $arrTempProspectedCompanyScientificNames = $dbProspectedCompanyScientificNames->getWhere('"ProspectedCompanyID" = ' . $objProspectedCompany->ID);
+                $arrProspectedCompanyScientificNames = [];
+                $arrCompanyMedicalLinesIDs = [];
+                $arrCompanySpecialtiesIDs = [];
+                foreach ($arrTempProspectedCompanyScientificNames as $objTemp) {
+                    $obj = BaseModel::toObject($objTemp);
+                    $arrProspectedCompanyScientificNames[] = $obj;
+
+                    if(!in_array($objTemp->MedicalLineID, $arrCompanyMedicalLinesIDs) && is_numeric($objTemp->MedicalLineID) && $objTemp->MedicalLineID > 0){
+                        $arrCompanyMedicalLinesIDs[] = $objTemp->MedicalLineID;
+                    }
+
+                    if(!in_array($objTemp->SpecialityID, $arrCompanySpecialtiesIDs) && is_numeric($objTemp->SpecialityID) && $objTemp->SpecialityID > 0){
+                        $arrCompanySpecialtiesIDs[] = $objTemp->SpecialityID;
+                    }
+                }
+                $this->f3->set('SESSION.arrCompanyScientificNames', $arrProspectedCompanyScientificNames);
+
+                $dbSpeciality = new BaseModel($dbConnectionAumet, 'setup.Speciality');
+                $arrTempSpeciality = $dbSpeciality->getWhere('"ID" in (' . implode(',',$arrCompanySpecialtiesIDs).')');
+                $arrCompanySpecialities = [];
+                foreach ($arrTempSpeciality as $objTemp) {
+                    $obj = BaseModel::toObject($objTemp);
+                    $arrCompanySpecialities[$objTemp->ID] = $obj;
+                }
+                $this->f3->set('SESSION.arrCompanySpecialities', $arrCompanySpecialities);
+
                 $dbProducts = new BaseModel($dbConnectionAumet, 'public.products');
                 $arrTempProducts = $dbProducts->getWhere('"manufacturerId" = ' . $companyId);
                 $arrProducts = [];
                 foreach ($arrTempProducts as $objProductTemp) {
                     $objProduct = BaseModel::toObject($objProductTemp);
+                    if(array_key_exists($objProductTemp->specialityId, $arrCompanySpecialities)){
+                        $objProduct->specialityName = $arrCompanySpecialities[$objProductTemp->specialityId]->Name;
+                    }
+                    else {
+                        $objProduct->specialityName = $objProductTemp->specialityId;
+                    }
                     $arrProducts[] = $objProduct;
-                }
 
+                }
                 $this->f3->set('SESSION.arrProducts', $arrProducts);
 
                 $this->rerouteMemberHome();

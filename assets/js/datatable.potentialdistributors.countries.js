@@ -332,8 +332,25 @@ var KTDatatableMySalesNetwork = function() {
         var datatable = $('#kt_datatable').KTDatatable({
             // datasource definition
             data: {
-                type: 'local',
-                source: dataJSONArray,
+                type: 'remote',
+                source: {
+                    read: {
+                        url: '/en/potentialdistributors/targetedcountries',
+                        // sample custom headers
+                        // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
+                        map: function(raw) {
+                            // sample data mapping
+                            var dataSet = raw;
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+                            return dataSet;
+                        },
+                    },
+                },
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
                 pageSize: 10,
                 saveState: false
             },
