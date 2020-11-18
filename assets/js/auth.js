@@ -584,7 +584,7 @@ var WebAuth = function () {
 						if (webResponse && typeof webResponse === 'object') {
 							if (webResponse.errorCode == 0) {
 								firebase.analytics().logEvent('auth_ok');
-								window.location.href = "/" + docLang + "/demo/start";
+								window.location.href = "/" + docLang;
 							} else {
 								Swal.fire({
 									text: webResponse.message,

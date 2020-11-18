@@ -67,8 +67,6 @@ class AuthController extends Controller
             $dbUser->photoUrl = $objFBuser->photoUrl;
             $dbUser->payload = json_encode($objFBuser);
 
-
-
             if($dbUser->dry()) {
                 $dbUser->statusId = $objFBuser->disabled ? 2 : 1;
             }
@@ -138,8 +136,122 @@ class AuthController extends Controller
         $this->f3->set('SESSION.arrCountries', $arrCountriesSession);
         $this->f3->set('SESSION.htmlSelectCountries', $htmlSelectCountryOptions);
 
+        global $dbConnectionOnEx;
+
+        $dbEntityUser = new BaseModel($dbConnectionOnEx, "entityUser");
+        $objEntityUser = $dbEntityUser->getByField("userId", $objSessionUser->id);
+        $objSessionUser->entityId=$objEntityUser->entityId;
+
+        $this->initEntitySessionData($objSessionUser->entityId);
+
         $this->f3->set('SESSION.token', $token);
         $this->f3->set('SESSION.objUser', $objSessionUser);
+    }
+
+    function initEntitySessionData($companyId)
+    {
+        global $dbConnectionAumet;
+
+        $dbCompany = new BaseModel($dbConnectionAumet, 'production.Company');
+        $arrCom = $dbCompany->getWhere('"ID" = ' . $companyId);
+        if(!$dbCompany->dry()){
+            $objCompany = BaseModel::toObject($arrCom[0]);
+            $this->f3->set('SESSION.objCompany', $objCompany);
+
+            /*
+            $dbCompanyProfile = new BaseModel($dbConnectionAumet, 'public.companies');
+            $arrProf = $dbCompanyProfile->getWhere('"XrefId" = ' . $companyId);
+            $dbCompanyProfile = BaseModel::toObject($dbCompanyProfile->getWhere('"XrefId" = ' . $companyId)[0]);
+            $this->f3->set('SESSION.objCompanyProfile', $dbCompanyProfile);
+
+            */
+            $dbManufacturer = new BaseModel($dbConnectionAumet, 'production.Manufacturer');
+            $objManufacturer = BaseModel::toObject($dbManufacturer->getWhere('"CompanyID" = ' . $companyId)[0]);
+            $this->f3->set('SESSION.objManufacturer', $objManufacturer);
+
+            $dbCountry = new BaseModel($dbConnectionAumet, 'public.countries');
+            $objCountry = BaseModel::toObject($dbCountry->getWhere('"id" = ' . $objCompany->CountryID)[0]);
+
+            $objCountry->flag = "";
+
+            switch ($objCountry->id) {
+                case 13:
+                    $objCountry->flag = "001-austria.svg";
+                    break;
+                case 14:
+                    $objCountry->flag = "009-australia.svg";
+                    break;
+                case 46:
+                    $objCountry->flag = "015-china.svg";
+                    break;
+                case 87:
+                    $objCountry->flag = "170-greece.svg";
+                    break;
+                case 111:
+                    $objCountry->flag = "077-jordan.svg";
+                    break;
+                case 168:
+                    $objCountry->flag = "121-new-zealand.svg";
+                    break;
+                case 228:
+                    $objCountry->flag = "226-united-states.svg";
+                    break;
+            }
+
+            $this->f3->set('SESSION.objCountry', $objCountry);
+
+
+
+            $dbProspectedCompany = new BaseModel($dbConnectionAumet, 'production.ProspectedCompany');
+            $objProspectedCompany = BaseModel::toObject($dbProspectedCompany->getWhere('"ID" = ' . $objCompany->ProspectedCompanyID)[0]);
+            $this->f3->set('SESSION.objProspectedCompany', $objProspectedCompany);
+
+            $dbProspectedCompanyScientificNames = new BaseModel($dbConnectionAumet, 'production.ProspectedCompanyScientificName');
+            $arrTempProspectedCompanyScientificNames = $dbProspectedCompanyScientificNames->getWhere('"ProspectedCompanyID" = ' . $objProspectedCompany->ID);
+            $arrProspectedCompanyScientificNames = [];
+            $arrCompanyMedicalLinesIDs = [];
+            $arrCompanySpecialtiesIDs = [];
+            foreach ($arrTempProspectedCompanyScientificNames as $objTemp) {
+                $obj = BaseModel::toObject($objTemp);
+                $arrProspectedCompanyScientificNames[] = $obj;
+
+                if(!in_array($objTemp->MedicalLineID, $arrCompanyMedicalLinesIDs) && is_numeric($objTemp->MedicalLineID) && $objTemp->MedicalLineID > 0){
+                    $arrCompanyMedicalLinesIDs[] = $objTemp->MedicalLineID;
+                }
+
+                if(!in_array($objTemp->SpecialityID, $arrCompanySpecialtiesIDs) && is_numeric($objTemp->SpecialityID) && $objTemp->SpecialityID > 0){
+                    $arrCompanySpecialtiesIDs[] = $objTemp->SpecialityID;
+                }
+            }
+            $this->f3->set('SESSION.arrCompanyScientificNames', $arrProspectedCompanyScientificNames);
+
+            $dbSpeciality = new BaseModel($dbConnectionAumet, 'setup.Speciality');
+            $arrTempSpeciality = $dbSpeciality->getWhere('"ID" in (' . implode(',',$arrCompanySpecialtiesIDs).')');
+            $arrCompanySpecialities = [];
+            foreach ($arrTempSpeciality as $objTemp) {
+                $obj = BaseModel::toObject($objTemp);
+                $arrCompanySpecialities[$objTemp->ID] = $obj;
+            }
+            $this->f3->set('SESSION.arrCompanySpecialities', $arrCompanySpecialities);
+
+            $dbProducts = new BaseModel($dbConnectionAumet, 'public.products');
+            $arrTempProducts = $dbProducts->getWhere('"manufacturerId" = ' . $companyId);
+            $arrProducts = [];
+            foreach ($arrTempProducts as $objProductTemp) {
+                $objProduct = BaseModel::toObject($objProductTemp);
+                if(array_key_exists($objProductTemp->specialityId, $arrCompanySpecialities)){
+                    $objProduct->specialityName = $arrCompanySpecialities[$objProductTemp->specialityId]->Name;
+                }
+                else {
+                    $objProduct->specialityName = $objProductTemp->specialityId;
+                }
+                $arrProducts[] = $objProduct;
+
+            }
+            $this->f3->set('SESSION.arrProducts', $arrProducts);
+
+            $this->rerouteMemberHome();
+        }
     }
 
     function clearUserSession()
