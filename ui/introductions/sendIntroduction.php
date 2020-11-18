@@ -4,60 +4,85 @@
             <div class="d-flex align-items-baseline flex-wrap mr-5">
 
                 <div class="d-flex flex-column text-dark-75">
-                    <h2 class="text-dark  mr-5 line-height-xl">
+                    <h4 class="text-dark  mr-5 line-height-xl">
                     <span class="svg-icon svg-icon-xxl mr-1">
 						<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
-						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                             height="24px" viewBox="0 0 24 24" version="1.1">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <rect x="0" y="0" width="24" height="24"/>
-                                <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z"
-                                      fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                                <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z"
-                                      fill="#000000" fill-rule="nonzero"/>
-                                <path d="M10.5,10.5 L10.5,9.5 C10.5,9.22385763 10.7238576,9 11,9 C11.2761424,9 11.5,9.22385763 11.5,9.5 L11.5,10.5 L12.5,10.5 C12.7761424,10.5 13,10.7238576 13,11 C13,11.2761424 12.7761424,11.5 12.5,11.5 L11.5,11.5 L11.5,12.5 C11.5,12.7761424 11.2761424,13 11,13 C10.7238576,13 10.5,12.7761424 10.5,12.5 L10.5,11.5 L9.5,11.5 C9.22385763,11.5 9,11.2761424 9,11 C9,10.7238576 9.22385763,10.5 9.5,10.5 L10.5,10.5 Z"
-                                      fill="#000000" opacity="0.3"/>
+                                <path d="M4,16 L5,16 C5.55228475,16 6,16.4477153 6,17 C6,17.5522847 5.55228475,18 5,18 L4,18 C3.44771525,18 3,17.5522847 3,17 C3,16.4477153 3.44771525,16 4,16 Z M1,11 L5,11 C5.55228475,11 6,11.4477153 6,12 C6,12.5522847 5.55228475,13 5,13 L1,13 C0.44771525,13 6.76353751e-17,12.5522847 0,12 C-6.76353751e-17,11.4477153 0.44771525,11 1,11 Z M3,6 L5,6 C5.55228475,6 6,6.44771525 6,7 C6,7.55228475 5.55228475,8 5,8 L3,8 C2.44771525,8 2,7.55228475 2,7 C2,6.44771525 2.44771525,6 3,6 Z" fill="#000000" opacity="0.3"/>
+                                <path d="M10,6 L22,6 C23.1045695,6 24,6.8954305 24,8 L24,16 C24,17.1045695 23.1045695,18 22,18 L10,18 C8.8954305,18 8,17.1045695 8,16 L8,8 C8,6.8954305 8.8954305,6 10,6 Z M21.0849395,8.0718316 L16,10.7185839 L10.9150605,8.0718316 C10.6132433,7.91473331 10.2368262,8.02389331 10.0743092,8.31564728 C9.91179228,8.60740125 10.0247174,8.9712679 10.3265346,9.12836619 L15.705737,11.9282847 C15.8894428,12.0239051 16.1105572,12.0239051 16.294263,11.9282847 L21.6734654,9.12836619 C21.9752826,8.9712679 22.0882077,8.60740125 21.9256908,8.31564728 C21.7631738,8.02389331 21.3867567,7.91473331 21.0849395,8.0718316 Z" fill="#000000"/>
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
 					</span>
-                        Potential Distributors in
+                        Send Introduction to
+                        <span class="text-primary font-weight-bolder">
+                            <?php echo $objDistributor->Name; ?></span>
+                         from
                         <span>
-                                            <div class="symbol symbol-25 mr-3">
-                                                <span class="text-dark font-weight-bolder">
-                                                    <?php echo $objCountry->Name; ?>
-                                                    <img alt="" class="ml-2" style="max-width: 30px"
-                                                         src="<?php echo $objCountry->FlagPath; ?>"/>
-                                                </span>
-
-
-                                            </div>
-
-                                        </span>
-                    </h2>
+                            <div class="symbol symbol-25 mr-3">
+                                <span class="text-dark font-weight-bolder">
+                                    <?php echo $objCountry->Name; ?>
+                                    <img alt="" class="ml-2" style="max-width: 30px"
+                                         src="<?php echo $objCountry->FlagPath; ?>"/>
+                                </span>
+                            </div>
+                        </span>
+                    </h4>
                     <span class="font-weight-normal font-size-h6 ml-12 pr-48">List of highly matching distributors that you can close deals with, based on our matching algorithm</span>
                 </div>
             </div>
         </div>
         <div class="d-flex align-items-center">
             <a href="javascript:;" class="btn btn-outline-primary font-weight-normal font-size-h5 py-2 px-5"
-               onclick="WebApp.loadPage('potentialdistributors')">Back</a>
+               onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID; ?>')">Back</a>
         </div>
     </div>
 </div>
 
 <div class="d-flex flex-column-fluid pt-10">
     <div class="container-fluid">
-
         <div class="card card-custom gutter-b">
             <div class="card-body">
-                <span class="font-size-h6 font-weight-bolder">Filter</span>
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row mb-1">
+                            <div class="col-3">
+                                <span class="font-size-h6 font-weight-bolder">From:</span>
+                            </div>
+                            <div class="col-9">
+                                <span class="font-size-h6 font-weight-normal">info@aumet.com</span>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-3">
+                                <span class="font-size-h6 font-weight-bolder">Sending to:</span>
+                            </div>
+                            <div class="col-9">
+                                <span class="font-size-h6 font-weight-normal">XYZ</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="font-size-h6 font-weight-bolder">Subject:</span>
+                            </div>
+                            <div class="col-9">
+                                <span class="font-size-h6 font-weight-normal">Business Opportunity in <?php echo $objCountry->Name; ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="javascript:;" class="btn btn-sm btn-outline-primary font-weight-normal font-size-h5 py-2 px-5 mr-2"
+                           onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID; ?>')">Cancel</a>
 
-        <?php foreach ($arrDistributors as $objDistributor): ?>
-            <div class="card card-custom gutter-b">
-                <div class="card-body">
+                        <a href="javascript:;" class="btn btn-sm btn-primary font-weight-normal font-size-h5 py-2 px-5"
+                           onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID; ?>')">
+                            <i class="flaticon2-telegram-logo"></i> Send Introduction</a>
+                    </div>
+                </div>
+                <div class="separator separator-solid my-8"></div>
+                <div class="row">
                     <div class="d-flex">
                         <div class="flex-shrink-0 mr-7">
                             <div class="symbol symbol-100">
@@ -111,7 +136,7 @@
                                                 </svg>
 
                                                 </span>PR Manager</a>
-                                                                                            <a href="#" class="text-muted text-hover-primary font-weight-bold">
+                                            <a href="#" class="text-muted text-hover-primary font-weight-bold">
                                                 <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
 
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
@@ -128,80 +153,12 @@
                                     </div>
                                 </div>
 
-                                <div class="my-lg-0 my-1">
-                                    <a href="javascript:;" class="btn btn-primary font-weight-bolder" onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID ?>/sendintroduction/<?php echo $objDistributor->ID ?>')">Send Introduction</a>
-                                </div>
-
-                            </div>
-
-                            <div class="d-flex align-items-center flex-wrap justify-content-between mt-6">
-                                <a href="#" class="btn btn-sm btn-outline-primary font-weight-bolder mr-2">Aumet Indicator</a>
-                                <div class="flex-grow-1 font-weight-bold text-dark-50 py-2 py-lg-2 mr-5 mt-2">
-                                    <div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-350px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 63%;"
-                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex mt-4 mt-sm-0">
-
-                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="separator separator-solid my-7"></div>
-
-                    <div class="d-flex align-items-center flex-wrap">
-
-                        <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                            <span class="mr-4">
-                            <i class="flaticon-diagram display-4 text-primary font-weight-bold"></i>
-                            </span>
-                            <div class="d-flex flex-column text-dark-75">
-                                <span class="font-weight-bolder font-size-h6">Annual Sales</span>
-                                <span class="font-weight-bolder font-size-h4">
-                                <?php echo $objDistributor->AnnualSales == null ? "<span class='text-muted'>Not Available<span>" : $objDistributor->AnnualSales ?>
-                            </div>
-                        </div>
-
-
-                        <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                            <span class="mr-4">
-                            <i class="flaticon-customer display-4 text-primary font-weight-bold"></i>
-                            </span>
-                            <div class="d-flex flex-column text-dark-75">
-                                <span class="font-weight-bold font-size-h6">Employees</span>
-                                <span class="font-weight-bolder font-size-h4"><?php echo $objDistributor->NumberOfEmployees == null ? "<span class='text-muted'>Not Available<span>" : $objDistributor->NumberOfEmployees ?></span>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                            <span class="mr-4">
-                            <i class="flaticon-trophy display-4 text-primary font-weight-bold"></i>
-                            </span>
-                            <div class="d-flex flex-column">
-                                <span class="text-dark-75 font-weight-bolder font-size-h6">Specialized in</span>
-                                <a href="#companyProfileOverView" class="text-primary font-weight-bold">
-                                    <?php $itemsCounter = 0; ?>
-                                    <?php foreach ($_SESSION['arrCompanySpecialities'] as $objItem):?>
-                                        <?php if($itemsCounter < 3): ?>
-                                            <span class="label label-light-dark label-inline mr-1 mb-1"><?php echo $objItem->Name?></span>
-                                        <?php endif; ?>
-                                        <?php $itemsCounter++; ?>
-                                    <?php endforeach; ?>
-                                    <?php if($itemsCounter >= 3): ?>
-                                        <span class="label label-light label-inline"><?php echo "+".($itemsCounter-3); ?></span>
-                                    <?php endif; ?>
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
-            </div>
-        <?php endforeach; ?>
 
+            </div>
+        </div>
     </div>
 </div>
