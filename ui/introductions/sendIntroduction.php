@@ -43,7 +43,7 @@
 
 <div class="d-flex flex-column-fluid pt-10">
     <div class="container-fluid">
-        <form>
+        <form id="frmIntroduction">
             <div class="card card-custom gutter-b">
             <div class="card-body">
                 <div class="row">
@@ -162,7 +162,7 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Text</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                        <input class="form-control" type="text" value="Artisanal kale" name="inoutTest">
                     </div>
                 </div>
             </div>
