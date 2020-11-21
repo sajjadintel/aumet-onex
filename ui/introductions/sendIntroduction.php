@@ -35,8 +35,19 @@
             </div>
         </div>
         <div class="d-flex align-items-center">
-            <a href="javascript:;" class="btn btn-outline-primary font-weight-normal font-size-h5 py-2 px-5"
-               onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID; ?>')">Back</a>
+            <?php if($objSubscription != null): ?>
+                <?php if($objSubscription->introductions > 0): ?>
+                    <div class="alert alert-custom alert-notice alert-light-primary fade show w-300px m-0 p-2" role="alert">
+                        <div class="alert-icon ml-2"><i class="la la-telegram"></i></div>
+                        <div class="alert-text text-dark font-size-h6">You have (<span class="font-weight-bolder font-size-h5"><?php echo $objSubscription->introductions ?></span>) introductions left</div>
+                    </div>
+                <?php else: ?>
+                    <div class="alert alert-custom alert-notice alert-light-danger fade show w-325px m-0 p-2" role="alert">
+                        <div class="alert-icon ml-2"><i class="la la-telegram"></i></div>
+                        <div class="alert-text text-dark font-size-h6">You don't have any introductions left</div>
+                    </div>
+                <?php endif;?>
+            <?php endif;?>
         </div>
     </div>
 </div>
@@ -78,7 +89,7 @@
                            onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID; ?>')">Cancel</a>
 
                         <a href="javascript:;" class="btn btn-sm btn-primary font-weight-normal font-size-h5 py-2 px-5"
-                           onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID; ?>')">
+                           onclick="WebApp.postForm('#frmIntroduction', 'potentialdistributors/country/<?php echo $objCountry->ID; ?>/sendintroduction/<?php echo $objDistributor->ID; ?>')">
                             <i class="flaticon2-telegram-logo"></i> Send Introduction</a>
                     </div>
                 </div>

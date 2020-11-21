@@ -1,5 +1,24 @@
 'use strict';
 
+// JQuery Functions
+(function ($) {
+	$.fn.serializeFormJSON = function () {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function () {
+			if (o[this.name]) {
+				if (!o[this.name].push) {
+					o[this.name] = [o[this.name]];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+})(jQuery);
+
 var datatableVar;
 
 // Class Definition
@@ -87,6 +106,44 @@ var WebApp = (function () {
 			type: 'POST',
 			dataType: 'json',
 			data: data,
+			async: true,
+		})
+			.done(function (webResponse) {
+				if (webResponse && typeof webResponse === 'object') {
+					if (webResponse.errorCode == 0) {
+						if (typeof fnCallback === 'function') {
+							fnCallback(webResponse);
+						}
+						_unblurPage();
+						_unblockPage();
+					} else {
+						_unblurPage();
+						_unblockPage();
+						_alertError(webResponse.message);
+					}
+				} else {
+					_unblurPage();
+					_unblockPage();
+					_alertError(WebAppLocals.getMessage('error'));
+				}
+			})
+			.fail(function (jqXHR, textStatus, errorThrown) {
+				_alertError(WebAppLocals.getMessage('error'));
+				_unblurPage();
+				_unblockPage();
+			});
+	};
+
+	var _postForm = function (formId, url, fnCallback = null) {
+		_blurPage();
+		_blockPage();
+		let _data = $(formId).serializeFormJSON();
+		let _url = '/' + docLang + '/'+ url;
+		$.ajax({
+			url: _url + '?_t=' + Date.now(),
+			type: 'POST',
+			dataType: 'json',
+			data: _data,
 			async: true,
 		})
 			.done(function (webResponse) {
@@ -469,6 +526,9 @@ var WebApp = (function () {
 		},
 		post: function (url, data = null, fnCallback = null) {
 			return _post(url, data, fnCallback);
+		},
+		postForm: function (formId, url, fnCallback = null) {
+			return _postForm(formId, url, fnCallback);
 		},
 		openModal: function (webResponse) {
 			_openModal(webResponse);

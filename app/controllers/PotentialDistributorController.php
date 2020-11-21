@@ -81,6 +81,9 @@ class PotentialDistributorController extends Controller
 
             global $dbConnectionAumet;
 
+            $objSubscription = (new Subscription())->getByCompany($this->objCompany->ID);
+            $this->f3->set('objSubscription', $objSubscription);
+
             $dbCountry = new BaseModel($dbConnectionAumet, 'setup.Country');
             $objCountry = BaseModel::toObject($dbCountry->getWhere('"ID" = ' . $countryId)[0]);
             $this->f3->set('objCountry', $objCountry);
@@ -98,4 +101,5 @@ class PotentialDistributorController extends Controller
             echo $this->webResponse->getJSONResponse();
         }
     }
+
 }

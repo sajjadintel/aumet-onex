@@ -49,8 +49,8 @@ $f3->route('POST /@language/potentialdistributors/addSuggestedToTargetedCountrie
 
 $f3->route('GET /@language/potentialdistributors/country/@countryId', 'PotentialDistributorController->getPotentialDistributorsByCountry');
 
-$f3->route('GET /@language/potentialdistributors/country/@countryId/sendintroduction/@entityId', 'IntroductionController->getSendPotentialDistributorIntroduction');
-
+$f3->route('GET /@language/potentialdistributors/country/@countryId/sendintroduction/@companyId', 'IntroductionController->getSendPotentialDistributorIntroduction');
+$f3->route('POST /@language/potentialdistributors/country/@countryId/sendintroduction/@companyId', 'IntroductionController->postSendPotentialDistributorIntroduction');
 
 $f3->route('GET /@language/mycompanyprofile', 'EntityController->getEntityProfile');
 
