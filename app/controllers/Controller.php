@@ -45,8 +45,10 @@ class Controller
             $this->isOnBoarding = false;
             $this->f3->set('isOnBoarding', $this->isOnBoarding);
 
-            $this->objCompany = $this->f3->get('SESSION.objCompany');
-            $this->f3->set('objCompany', $this->objCompany);
+            $objAumetCompany = new AumetCompany();
+            $objAumetCompany->loadFromSession();
+
+            $this->objCompany = $objAumetCompany->objCompany;
 
             $this->objCompanyProfile = $this->f3->get('SESSION.objCompanyProfile');
             $this->f3->set('objCompanyProfile', $this->objCompanyProfile);

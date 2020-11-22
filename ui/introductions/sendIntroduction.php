@@ -88,8 +88,7 @@
                         <a href="javascript:;" class="btn btn-sm btn-outline-primary font-weight-normal font-size-h5 py-2 px-5 mr-2"
                            onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID; ?>')">Cancel</a>
 
-                        <a href="javascript:;" class="btn btn-sm btn-primary font-weight-normal font-size-h5 py-2 px-5"
-                           onclick="WebApp.postForm('#frmIntroduction', 'potentialdistributors/country/<?php echo $objCountry->ID; ?>/sendintroduction/<?php echo $objDistributor->ID; ?>')">
+                        <a href="javascript:;" class="btn btn-sm btn-primary font-weight-normal font-size-h5 py-2 px-5" data-toggle="modal" data-target="#exampleModalCustomScrollable">
                             <i class="flaticon2-telegram-logo"></i> Send Introduction</a>
                     </div>
                 </div>
@@ -179,5 +178,51 @@
             </div>
         </div>
         </form>
+    </div>
+</div>
+
+<!-- Modal-->
+<div class="modal fade" id="exampleModalCustomScrollable" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div data-scroll="true" data-height="300">
+                    ...
+                    <div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSendIntroduction" tabindex="-1" role="dialog" aria-labelledby="modalSendIntroduction" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content" id="modalContentSendIntroduction">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupModalTitle">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body align-items-stretch">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary"
+                        onclick="WebApp.postForm('#frmIntroduction', 'potentialdistributors/country/<?php echo $objCountry->ID; ?>/sendintroduction/<?php echo $objDistributor->ID; ?>')">Send</button>
+            </div>
+        </div>
     </div>
 </div>

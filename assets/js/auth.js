@@ -660,7 +660,6 @@ var WebAuth = function () {
 			//_handleFormSignup();
 		},
 		signIn: function () {
-
 			_handleFormSignin();
 		},
 		googleSignIn: function () {

@@ -150,12 +150,18 @@ class AuthController extends Controller
 
     function initEntitySessionData($companyId)
     {
+        $objAumetCompany = new AumetCompany();
+        $objAumetCompany->loadById($companyId);
+        $objAumetCompany->syncSession();
+    }
+
+    function initEntitySessionDataOLD($companyId)
+    {
         global $dbConnectionAumet;
 
-        $dbCompany = new BaseModel($dbConnectionAumet, 'production.Company');
-        $arrCom = $dbCompany->getWhere('"ID" = ' . $companyId);
+        $dbCompany = new Company();
+        $objCompany = $dbCompany->getById($companyId);
         if(!$dbCompany->dry()){
-            $objCompany = BaseModel::toObject($arrCom[0]);
             $this->f3->set('SESSION.objCompany', $objCompany);
 
             /*
@@ -167,7 +173,7 @@ class AuthController extends Controller
             */
             $dbManufacturer = new BaseModel($dbConnectionAumet, 'production.Manufacturer');
             $objManufacturer = BaseModel::toObject($dbManufacturer->getWhere('"CompanyID" = ' . $companyId)[0]);
-            $this->f3->set('SESSION.objManufacturer', $objManufacturer);
+            //$this->f3->set('SESSION.objManufacturer', $objManufacturer);
 
             $dbCountry = new BaseModel($dbConnectionAumet, 'public.countries');
             $objCountry = BaseModel::toObject($dbCountry->getWhere('"id" = ' . $objCompany->CountryID)[0]);

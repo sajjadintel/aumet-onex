@@ -268,7 +268,7 @@ function compress_htmlcode($codedata)
 	<?php //include_once 'stickyToolbar.php'; ?>
 	<!--end::Sticky Toolbar-->
 
-    <?php include_once __DIR__. '/../onboarding/modals.php'; ?>
+    <?php //include_once __DIR__. '/../onboarding/modals.php'; ?>
 
 	<script>
 		var docLang = "<?php echo $LANGUAGE; ?>";
@@ -294,11 +294,10 @@ function compress_htmlcode($codedata)
         jQuery(document).ready(function () {
             WebApp.init();
             if(_isOnBoarding) {
-                OnBoarding.init();
+               OnBoarding.init();
             }
 
         });
-
     </script>
 </body>
 <!--end::Body-->
