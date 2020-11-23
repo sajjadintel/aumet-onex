@@ -11,6 +11,11 @@ class Introduction extends \BaseModel
 
     public function getByCompany($companyId)
     {
-        return $this->getByField('"companyId"', $companyId);
+        return $this->getByField('"fromCompanyId"', $companyId);
+    }
+
+    public function getById($introductionId)
+    {
+        return $this->getByField('"id"', $introductionId);
     }
 }

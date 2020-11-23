@@ -265,7 +265,7 @@
                             <span class="text-dark-75 font-weight-bolder font-size-h6">Specialized in</span>
                             <a href="#companyProfileOverView" class="text-primary font-weight-bold">
                                 <?php $itemsCounter = 0; ?>
-                                <?php foreach ($_SESSION['arrCompanySpecialities'] as $objItem):?>
+                                <?php foreach ($_SESSION['arrSpecialities'] as $objItem):?>
                                     <?php if($itemsCounter < 3): ?>
                                         <span class="label label-light-dark label-inline mr-1 mb-1"><?php echo $objItem->Name?></span>
                                     <?php endif; ?>
@@ -390,7 +390,7 @@
 
                         <h5 class=" mt-5 mb-3">Specialties:</h5>
                         <p class="font-weight-normal font-size-h6">
-                            <?php foreach ($_SESSION['arrCompanySpecialities'] as $objItem):?>
+                            <?php foreach ($_SESSION['arrSpecialities'] as $objItem):?>
                                 <span class="label label-primary label-inline mr-1 label-lg mb-1"><?php echo $objItem->Name?></span>
                             <?php endforeach; ?>
                         </p>

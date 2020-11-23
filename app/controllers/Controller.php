@@ -49,9 +49,7 @@ class Controller
             $objAumetCompany->loadFromSession();
 
             $this->objCompany = $objAumetCompany->objCompany;
-
-            $this->objCompanyProfile = $this->f3->get('SESSION.objCompanyProfile');
-            $this->f3->set('objCompanyProfile', $this->objCompanyProfile);
+            $this->f3->set('objCompany', $this->objCompany);
 
             $this->objManufacturer = $this->f3->get('SESSION.objManufacturer');
             $this->f3->set('objManufacturer', $this->objManufacturer);

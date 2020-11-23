@@ -52,6 +52,12 @@ $f3->route('GET /@language/potentialdistributors/country/@countryId', 'Potential
 $f3->route('GET /@language/potentialdistributors/country/@countryId/sendintroduction/@companyId', 'IntroductionController->getSendPotentialDistributorIntroduction');
 $f3->route('POST /@language/potentialdistributors/country/@countryId/sendintroduction/@companyId', 'IntroductionController->postSendPotentialDistributorIntroduction');
 
+$f3->route('GET /@language/introductions/@introductionId', 'IntroductionController->getViewIntroduction');
+$f3->route('GET /@language/introductions', 'IntroductionController->getSentIntroductions');
+
+$f3->route('GET /@language/mydistributors', 'DistributorController->getMyDistributors');
+
+
 $f3->route('GET /@language/mycompanyprofile', 'EntityController->getEntityProfile');
 
 

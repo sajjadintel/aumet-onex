@@ -85,15 +85,11 @@ class PotentialDistributorController extends Controller
             $this->f3->set('objSubscription', $objSubscription);
 
             $dbCountry = new BaseModel($dbConnectionAumet, 'setup.Country');
-            $objCountry = BaseModel::toObject($dbCountry->getWhere('"ID" = ' . $countryId)[0]);
+            $objCountry = $dbCountry->getByField('"ID"', $countryId);
             $this->f3->set('objCountry', $objCountry);
 
-            $dbDistributors = new BaseModel($dbConnectionAumet, 'production.Company');
-            $arrTemp = $dbDistributors->getWhere('"Type" = \'distributor\' AND "DeletedAt" IS NULL AND "CountryID"='.$countryId);
-            $arrDistributors = [];
-            foreach ($arrTemp as $objDistributorTemp) {
-                $arrDistributors[] = BaseModel::toObject($objDistributorTemp);
-            }
+            $dbDistributors = new BaseModel($dbConnectionAumet, 'onex.vwPotentialConnections');
+            $arrDistributors = $dbDistributors->getWhere('"companyId"='.$this->objCompany->ID.' and "connectionStatusId"=1 and "CountryID"='.$countryId);
             $this->f3->set('arrDistributors', $arrDistributors);
 
             $this->webResponse->setData(View::instance()->render("potentialdistributors/byCountry.php"));

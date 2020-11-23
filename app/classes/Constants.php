@@ -17,5 +17,6 @@ class Constants
     const ERROR_SUCCESS = 0;
     const ERROR_UNKNOWN = 1;
     const ERROR_USER_NOT_FOUND = 2;
-    const ERROR_USER_DISABLED = 2;
+    const ERROR_USER_DISABLED = 3;
+    const ERROR_USER_COMPANY_SETUP = 4;
 }

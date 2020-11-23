@@ -16,7 +16,7 @@
                         </svg>
                         <!--end::Svg Icon-->
 					</span>
-                        Send Introduction to
+                        Introduction sent to
                         <span class="text-primary font-weight-bolder">
                             <?php echo $objDistributor->Name; ?></span>
                          from
@@ -30,24 +30,13 @@
                             </div>
                         </span>
                     </h4>
-                    <span class="font-weight-normal font-size-h6 ml-12 pr-48">List of highly matching distributors that you can close deals with, based on our matching algorithm</span>
+                    <span class="font-weight-normal font-size-h6 ml-12 pr-48"></span>
                 </div>
             </div>
         </div>
         <div class="d-flex align-items-center">
-            <?php if($objSubscription != null): ?>
-                <?php if($objSubscription->introductions > 0): ?>
-                    <div class="alert alert-custom alert-notice alert-light-primary fade show w-300px m-0 p-2" role="alert">
-                        <div class="alert-icon ml-2"><i class="la la-telegram"></i></div>
-                        <div class="alert-text text-dark font-size-h6">You have (<span class="font-weight-bolder font-size-h5" id="sendIntroductionCountContainer"><?php echo $objSubscription->introductions ?></span>) introductions left</div>
-                    </div>
-                <?php else: ?>
-                    <div class="alert alert-custom alert-notice alert-light-danger fade show w-325px m-0 p-2" role="alert">
-                        <div class="alert-icon ml-2"><i class="la la-telegram"></i></div>
-                        <div class="alert-text text-dark font-size-h6">You don't have any introductions left</div>
-                    </div>
-                <?php endif;?>
-            <?php endif;?>
+            <a href="javascript:;" class="btn btn-sm btn-outline-primary font-weight-normal font-size-h5 py-2 px-5 mr-2"
+               onclick="WebApp.loadPage('introductions')">Back</a>
         </div>
     </div>
 </div>
@@ -69,7 +58,7 @@
                         </div>
                         <div class="row mb-1">
                             <div class="col-3">
-                                <span class="font-size-h6 font-weight-bolder">Sending to:</span>
+                                <span class="font-size-h6 font-weight-bolder">Sent to:</span>
                             </div>
                             <div class="col-9">
                                 <span class="font-size-h6 font-weight-normal"><?php echo $objDistributor->objUser != null ? $objDistributor->objUser->FirstName . " ". $objDistributor->objUser->LastName  : ""?></span>
@@ -85,12 +74,7 @@
                         </div>
                     </div>
                     <div class="col-6 text-right" id="sendIntroductionActionsContainer">
-                        <a href="javascript:;" class="btn btn-sm btn-outline-primary font-weight-normal font-size-h5 py-2 px-5 mr-2"
-                           onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID; ?>')">Cancel</a>
-
-                        <a href="javascript:;" class="btn btn-sm btn-primary font-weight-normal font-size-h5 py-2 px-5"
-                         onclick="WebApp.postForm('#frmIntroduction', 'potentialdistributors/country/<?php echo $objCountry->ID; ?>/sendintroduction/<?php echo $objDistributor->ID; ?>', fnCallBackSendIntroduction)">
-                            <i class="flaticon2-telegram-logo"></i> Send Introduction</a>
+                        status
                     </div>
                 </div>
                 <div class="separator separator-solid my-8"></div>
@@ -180,17 +164,3 @@
         </form>
     </div>
 </div>
-
-<script>
-    function fnCallBackSendIntroduction(webResponse){
-        if(webResponse.errorCode == 0) {
-
-            var btnView = '<a href="javascript:;" class="btn btn-sm btn-primary font-weight-normal font-size-h5 py-2 px-5" onclick="WebApp.loadPage(\'introductions/'+webResponse.data.introductionId +'\')">\
-                <i class="flaticon2-envelope"></i> View Introduction</a>';
-            $("#sendIntroductionCountContainer").html(webResponse.data.introductionsCredit);
-            $("#sendIntroductionActionsContainer").html(btnView);
-
-            WebApp.alertSuccess("Introduction has been sent successfully");
-        }
-    }
-</script>

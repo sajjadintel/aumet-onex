@@ -106,20 +106,20 @@ class DemoController extends Controller
 
                 $dbSpeciality = new BaseModel($dbConnectionAumet, 'setup.Speciality');
                 $arrTempSpeciality = $dbSpeciality->getWhere('"ID" in (' . implode(',',$arrCompanySpecialtiesIDs).')');
-                $arrCompanySpecialities = [];
+                $arrSpecialities = [];
                 foreach ($arrTempSpeciality as $objTemp) {
                     $obj = BaseModel::toObject($objTemp);
-                    $arrCompanySpecialities[$objTemp->ID] = $obj;
+                    $arrSpecialities[$objTemp->ID] = $obj;
                 }
-                $this->f3->set('SESSION.arrCompanySpecialities', $arrCompanySpecialities);
+                $this->f3->set('SESSION.arrSpecialities', $arrSpecialities);
 
                 $dbProducts = new BaseModel($dbConnectionAumet, 'public.products');
                 $arrTempProducts = $dbProducts->getWhere('"manufacturerId" = ' . $companyId);
                 $arrProducts = [];
                 foreach ($arrTempProducts as $objProductTemp) {
                     $objProduct = BaseModel::toObject($objProductTemp);
-                    if(array_key_exists($objProductTemp->specialityId, $arrCompanySpecialities)){
-                        $objProduct->specialityName = $arrCompanySpecialities[$objProductTemp->specialityId]->Name;
+                    if(array_key_exists($objProductTemp->specialityId, $arrSpecialities)){
+                        $objProduct->specialityName = $arrSpecialities[$objProductTemp->specialityId]->Name;
                     }
                     else {
                         $objProduct->specialityName = $objProductTemp->specialityId;

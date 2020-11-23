@@ -28,6 +28,7 @@ class IntroductionController extends Controller
 
             $dbDistributor = new BaseModel($dbConnectionAumet, 'production.Company');
             $objDistributor = BaseModel::toObject($dbDistributor->getWhere('"ID" = ' . $companyId)[0]);
+            $objDistributor->objUser = (new AumetUser())->getOneByCompanyId($objDistributor->ID);
             $this->f3->set('objDistributor', $objDistributor);
 
             $this->webResponse->setData(View::instance()->render("introductions/sendIntroduction.php"));
@@ -47,16 +48,21 @@ class IntroductionController extends Controller
             $dbSubscription->getByCompany($this->objCompany->ID);
 
             if(!$dbSubscription->dry()) {
-                if($dbSubscription->statusId == SubscriptionStatus::active) {
+                if($dbSubscription->statusId == 1) {
                     if($dbSubscription->introductions > 0) {
                         $dbIntroduction = new Introduction();
                         $dbIntroduction->userId = $this->objUser->id;
                         $dbIntroduction->fromCompanyId = $this->objCompany->ID;
                         $dbIntroduction->toCompanyId = $companyId;
-                        $dbIntroduction->add();
+                        $dbIntroduction->addReturnID();
 
                         $dbSubscription->introductions = $dbSubscription->introductions - 1;
                         $dbSubscription->update();
+
+                        $objRes = new stdClass();
+                        $objRes->introductionsCredit = $dbSubscription->introductions;
+                        $objRes->introductionId = $dbIntroduction->id;
+                        $this->webResponse->setData($objRes);
                     }
                     else {
                         $this->webResponse->setErrorCode(IntroductionController::IntroductionControllerError_noEnoughCredits);
@@ -71,6 +77,55 @@ class IntroductionController extends Controller
             }
 
             //$this->webResponse->setData( $this->f3->get('POST'));
+
+            echo $this->webResponse->getJSONResponse();
+        }
+    }
+
+    function getViewIntroduction(){
+        $introductionId = $this->f3->get("PARAMS.introductionId");
+
+        if (!$this->f3->ajax()) {
+            $this->renderLayout("introductions/$introductionId");
+        } else {
+
+            $dbIntroduction = new Introduction();
+            $dbIntroduction->getById($introductionId);
+
+            global $dbConnectionAumet;
+
+            $objSubscription = (new Subscription())->getByCompany($this->objCompany->ID);
+            $this->f3->set('objSubscription', $objSubscription);
+
+            $dbDistributor = new BaseModel($dbConnectionAumet, 'production.Company');
+            $objDistributor = BaseModel::toObject($dbDistributor->getWhere('"ID" = ' . $dbIntroduction->toCompanyId)[0]);
+            $objDistributor->objUser = (new AumetUser())->getOneByCompanyId($objDistributor->ID);
+            $this->f3->set('objDistributor', $objDistributor);
+
+            $dbCountry = new BaseModel($dbConnectionAumet, 'setup.Country');
+            $objCountry = BaseModel::toObject($dbCountry->getWhere('"ID" = ' . $objDistributor->CountryID)[0]);
+            $this->f3->set('objCountry', $objCountry);
+
+            $this->webResponse->setData(View::instance()->render("introductions/viewIntroduction.php"));
+            echo $this->webResponse->getJSONResponse();
+        }
+    }
+
+    function getSentIntroductions(){
+        if (!$this->f3->ajax()) {
+            $this->renderLayout("introductions");
+        } else {
+
+            global $dbConnectionAumet;
+
+            $objSubscription = (new Subscription())->getByCompany($this->objCompany->ID);
+            $this->f3->set('objSubscription', $objSubscription);
+
+            $dbSentIntroductions = new BaseModel($dbConnectionAumet, 'onex.vwSentIntroductions');
+            $arrSentIntroductions = $dbSentIntroductions->getWhere('"fromCompanyId"='.$this->objCompany->ID);
+            $this->f3->set('arrSentIntroductions', $arrSentIntroductions);
+
+            $this->webResponse->setData(View::instance()->render("introductions/list.php"));
 
             echo $this->webResponse->getJSONResponse();
         }

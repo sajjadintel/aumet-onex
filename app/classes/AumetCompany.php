@@ -21,7 +21,13 @@ class AumetCompany
         global $dbConnectionAumet;
 
         $this->objCompany = (new Company())->getById($companyId);
-        $this->objProspectedCompany = (new ProspectedCompany())->getById($this->objCompany->ProspectedCompanyID);
+        if($this->objCompany == null) {
+            return false;
+        }
+        $this->objProspectedCompany = (new ProspectedCompany())->getByField('"ID"', $this->objCompany->ProspectedCompanyID);
+        if($this->objProspectedCompany == null) {
+            return false;
+        }
 
         $dbProspectedCompanyScientificNames = new BaseModel($dbConnectionAumet, 'production.ProspectedCompanyScientificName');
         $arrTempProspectedCompanyScientificNames = $dbProspectedCompanyScientificNames->getWhere('"ProspectedCompanyID" = ' . $this->objCompany->ProspectedCompanyID);
@@ -64,24 +70,28 @@ class AumetCompany
         }
 
         $dbCountry = new BaseModel($dbConnectionAumet, 'public.countries');
-        $this->objCountry = $dbCountry->getByField('"ID"', $this->objCompany->CountryID );
+        $this->objCountry = $dbCountry->getByField('"id"', $this->objCompany->CountryID );
+
+        return true;
     }
 
     public function syncSession(){
-        $this->f3->set('SESSION.objCompany', $this->objCompany);
-        $this->f3->set('SESSION.objCountry', $this->objCountry);
-        $this->f3->set('SESSION.objProspectedCompany', $this->objProspectedCompany);
-        $this->f3->set('SESSION.arrScientificNames', $this->arrProspectedCompanyScientificNames);
-        $this->f3->set('SESSION.arrSpecialities', $this->arrSpecialities);
-        $this->f3->set('SESSION.arrProducts', $this->arrProducts);
+        $f3 = \Base::instance();
+        $f3->set('SESSION.objCompany', $this->objCompany);
+        $f3->set('SESSION.objCountry', $this->objCountry);
+        $f3->set('SESSION.objProspectedCompany', $this->objProspectedCompany);
+        $f3->set('SESSION.arrScientificNames', $this->arrProspectedCompanyScientificNames);
+        $f3->set('SESSION.arrSpecialities', $this->arrSpecialities);
+        $f3->set('SESSION.arrProducts', $this->arrProducts);
     }
 
     public function loadFromSession(){
-        $this->objCompany = $this->f3->get('SESSION.objCompany');
-        $this->objCountry = $this->f3->get('SESSION.objCountry');
-        $this->objProspectedCompany = $this->f3->get('SESSION.objProspectedCompany');
-        $this->arrProspectedCompanyScientificNames = $this->f3->get('SESSION.arrScientificNames');
-        $this->arrSpecialities = $this->f3->get('SESSION.arrSpecialities');
-        $this->arrProducts = $this->f3->get('SESSION.arrProducts');
+        $f3 = \Base::instance();
+        $this->objCompany = $f3->get('SESSION.objCompany');
+        $this->objCountry = $f3->get('SESSION.objCountry');
+        $this->objProspectedCompany = $f3->get('SESSION.objProspectedCompany');
+        $this->arrProspectedCompanyScientificNames = $f3->get('SESSION.arrScientificNames');
+        $this->arrSpecialities = $f3->get('SESSION.arrSpecialities');
+        $this->arrProducts = $f3->get('SESSION.arrProducts');
     }
 }

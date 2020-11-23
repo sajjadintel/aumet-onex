@@ -95,7 +95,7 @@
             </li>
 
             <li class="menu-item" aria-haspopup="true">
-                <a href="javascript:;" class="menu-link" onclick="WebApp.loadPage('mysalesnetwork')">
+                <a href="javascript:;" class="menu-link" onclick="WebApp.loadPage('mydistributors')">
 					<span class="svg-icon menu-icon">
 						<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -107,7 +107,7 @@
                         </svg>
                         <!--end::Svg Icon-->
 					</span>
-                    <span class="menu-text font-size-h6">My Sales Network</span>
+                    <span class="menu-text font-size-h6">My Distributors</span>
                 </a>
             </li>
 

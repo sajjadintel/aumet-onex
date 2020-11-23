@@ -21,21 +21,9 @@
                         </svg>
                         <!--end::Svg Icon-->
 					</span>
-                        Potential Distributors in
-                        <span>
-                                            <div class="symbol symbol-25 mr-3">
-                                                <span class="text-dark font-weight-bolder">
-                                                    <?php echo $objCountry->Name; ?>
-                                                    <img alt="" class="ml-2" style="max-width: 30px"
-                                                         src="<?php echo $objCountry->FlagPath; ?>"/>
-                                                </span>
-
-
-                                            </div>
-
-                                        </span>
+                        Sent Introductions
                     </h2>
-                    <span class="font-weight-normal font-size-h6 ml-12 pr-48">List of highly matching distributors that you can close deals with, based on our matching algorithm</span>
+                    <span class="font-weight-normal font-size-h6 ml-12 pr-48">List of sent introductions</span>
                 </div>
             </div>
         </div>
@@ -53,8 +41,6 @@
                     </div>
                 <?php endif;?>
             <?php endif;?>
-            <a href="javascript:;" class="btn btn-outline-primary font-weight-normal font-size-h5 py-2 px-5"
-               onclick="WebApp.loadPage('potentialdistributors')">Back</a>
         </div>
     </div>
 </div>
@@ -68,7 +54,7 @@
             </div>
         </div>
 
-        <?php foreach ($arrDistributors as $objDistributor): ?>
+        <?php foreach ($arrSentIntroductions as $objDistributor): ?>
             <div class="card card-custom gutter-b">
                 <div class="card-body">
                     <div class="d-flex">
@@ -82,7 +68,8 @@
                                 <div class="mr-3">
                                     <a href="#" class="d-flex align-items-center text-dark text-hover-primary font-size-h4 font-weight-bold mr-3">
                                         <?php echo $objDistributor->Name ?>
-                                        <i class="flaticon2-correct text-success icon-md ml-2"></i></a>
+                                        <img alt="" class="ml-2" style="max-width: 30px"
+                                             src="<?php echo $objDistributor->CountryFlag; ?>"/></a>
 
 
                                     <div class="d-flex flex-wrap mt-4">
@@ -123,7 +110,7 @@
                                                 </g>
                                                 </svg>
 
-                                                </span><?php echo $objDistributor->BussinessUserJobTitle ?></a>
+                                                </span><?php echo $objDistributor->BussinessUserJobTitle?></a>
 
                                             <a href="#" class="text-dark text-hover-primary font-weight-bold">
                                                 <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
@@ -142,7 +129,9 @@
                                 </div>
 
                                 <div class="my-lg-0 my-1">
-                                    <a href="javascript:;" class="btn btn-primary font-weight-bolder" onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->ID ?>/sendintroduction/<?php echo $objDistributor->ID ?>')">Send Introduction</a>
+                                    <span class="label label-inline label-lg label-primary font-weight-bolder">
+                                        <?php echo $objDistributor->introductionStatusName ?>
+                                    </span>
                                 </div>
 
                             </div>

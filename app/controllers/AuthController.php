@@ -78,14 +78,18 @@ class AuthController extends Controller
             $dbUser->save();
 
             if($dbUser->statusId == 1){
-                $this->setSessionData($objSessionUser, $idTokenString);
-
-                $this->webResponse->setErrorCode(Constants::ERROR_SUCCESS);
+                if($this->setSessionData($objSessionUser, $idTokenString)){
+                    $this->webResponse->setErrorCode(Constants::ERROR_SUCCESS);
+                }
+                else {
+                    $this->webResponse->setErrorCode(Constants::ERROR_USER_COMPANY_SETUP);
+                    $this->webResponse->setMessage($this->f3->get("ERROR_USER_DISABLED"));
+                }
             }
             else {
                 $auth->revokeRefreshTokens($uid);
                 $this->webResponse->setErrorCode(Constants::ERROR_USER_DISABLED);
-                $this->webResponse->setMessage($this->get("ERROR_USER_DISABLED"));
+                $this->webResponse->setMessage($this->f3->get("ERROR_USER_DISABLED"));
             }
         } catch (\InvalidArgumentException $e) {
             $this->webResponse->setErrorCode(Constants::ERROR_UNKNOWN);
@@ -133,8 +137,6 @@ class AuthController extends Controller
             $arrCountriesSession[] = BaseModel::toObject($country);
             $htmlSelectCountryOptions .= "<option value='$country->id'>$country->country</option>";
         }
-        $this->f3->set('SESSION.arrCountries', $arrCountriesSession);
-        $this->f3->set('SESSION.htmlSelectCountries', $htmlSelectCountryOptions);
 
         global $dbConnectionOnEx;
 
@@ -142,17 +144,33 @@ class AuthController extends Controller
         $objEntityUser = $dbEntityUser->getByField("userId", $objSessionUser->id);
         $objSessionUser->entityId=$objEntityUser->entityId;
 
-        $this->initEntitySessionData($objSessionUser->entityId);
+        if($this->initEntitySessionData($objSessionUser->entityId)) {
+            $this->f3->set('SESSION.arrCountries', $arrCountriesSession);
+            $this->f3->set('SESSION.htmlSelectCountries', $htmlSelectCountryOptions);
 
-        $this->f3->set('SESSION.token', $token);
-        $this->f3->set('SESSION.objUser', $objSessionUser);
+            $this->f3->set('SESSION.token', $token);
+            $this->f3->set('SESSION.objUser', $objSessionUser);
+
+            return true;
+        }
+        else {
+            return false;
+        }
+
+
     }
 
     function initEntitySessionData($companyId)
     {
         $objAumetCompany = new AumetCompany();
-        $objAumetCompany->loadById($companyId);
-        $objAumetCompany->syncSession();
+        if($objAumetCompany->loadById($companyId)){
+            $objAumetCompany->syncSession();
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
     function initEntitySessionDataOLD($companyId)
@@ -233,20 +251,20 @@ class AuthController extends Controller
 
             $dbSpeciality = new BaseModel($dbConnectionAumet, 'setup.Speciality');
             $arrTempSpeciality = $dbSpeciality->getWhere('"ID" in (' . implode(',',$arrCompanySpecialtiesIDs).')');
-            $arrCompanySpecialities = [];
+            $arrSpecialities = [];
             foreach ($arrTempSpeciality as $objTemp) {
                 $obj = BaseModel::toObject($objTemp);
-                $arrCompanySpecialities[$objTemp->ID] = $obj;
+                $arrSpecialities[$objTemp->ID] = $obj;
             }
-            $this->f3->set('SESSION.arrCompanySpecialities', $arrCompanySpecialities);
+            $this->f3->set('SESSION.arrSpecialities', $arrSpecialities);
 
             $dbProducts = new BaseModel($dbConnectionAumet, 'public.products');
             $arrTempProducts = $dbProducts->getWhere('"manufacturerId" = ' . $companyId);
             $arrProducts = [];
             foreach ($arrTempProducts as $objProductTemp) {
                 $objProduct = BaseModel::toObject($objProductTemp);
-                if(array_key_exists($objProductTemp->specialityId, $arrCompanySpecialities)){
-                    $objProduct->specialityName = $arrCompanySpecialities[$objProductTemp->specialityId]->Name;
+                if(array_key_exists($objProductTemp->specialityId, $arrSpecialities)){
+                    $objProduct->specialityName = $arrSpecialities[$objProductTemp->specialityId]->Name;
                 }
                 else {
                     $objProduct->specialityName = $objProductTemp->specialityId;
