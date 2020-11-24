@@ -182,12 +182,12 @@ class SearchController extends Controller
             }
 
             $entityQuery = "";
-            $entityId = $datatable['query']['entityId'];
-            if (isset($entityId)) {
-                if (is_array($entityId)) {
-                    $entityQuery = "entityId in (" . implode(",", $entityId) . ")";
+            $companyId = $datatable['query']['companyId'];
+            if (isset($companyId)) {
+                if (is_array($companyId)) {
+                    $entityQuery = "companyId in (" . implode(",", $companyId) . ")";
                 } else {
-                    $entityQuery = "entityId = $entityId";
+                    $entityQuery = "companyId = $companyId";
                 }
             }
 
@@ -253,7 +253,7 @@ class SearchController extends Controller
         while (!$dbProducts->dry()) {
             $objItem = new stdClass();
             $objItem->id = $dbProducts->id;
-            $objItem->entityId = $dbProducts->entityId;
+            $objItem->companyId = $dbProducts->companyId;
             $objItem->entityName_ar = $dbProducts->entityName_ar;
             $objItem->entityName_en = $dbProducts->entityName_en;
             $objItem->entityName_fr = $dbProducts->entityName_fr;
