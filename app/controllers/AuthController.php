@@ -56,8 +56,8 @@ class AuthController extends Controller
 
             global $dbConnectionAuth;
 
-            $dbUser = new BaseModel($dbConnectionAuth, "user");
-            $objSessionUser = $dbUser->getByField("uid", $uid);
+            $dbUser = new AuthUser();
+            $objSessionUser = $dbUser->getByUID($uid);
 
             $dbUser->uid = $uid;
             $dbUser->email = $objFBuser->email;
@@ -129,7 +129,7 @@ class AuthController extends Controller
     function setSessionData($objSessionUser, $token){
         global $dbConnectionAumet;
 
-        $dbCountry = new BaseModel($dbConnectionAumet, 'public.countries');
+        $dbCountry = new Country();
         $arrCountries = $dbCountry->all("country asc");
         $arrCountriesSession = [];
         $htmlSelectCountryOptions="";
@@ -138,13 +138,11 @@ class AuthController extends Controller
             $htmlSelectCountryOptions .= "<option value='$country->id'>$country->country</option>";
         }
 
-        global $dbConnectionOnEx;
+        $dbCompanyUser = new CompanyUser();
+        $objCompanyUser = $dbCompanyUser->getByUserId($objSessionUser->id);
+        $objSessionUser->companyId=$objCompanyUser->companyId;
 
-        $dbEntityUser = new BaseModel($dbConnectionOnEx, "entityUser");
-        $objEntityUser = $dbEntityUser->getByField("userId", $objSessionUser->id);
-        $objSessionUser->entityId=$objEntityUser->entityId;
-
-        if($this->initEntitySessionData($objSessionUser->entityId)) {
+        if($this->initEntitySessionData($objSessionUser->companyId)) {
             $this->f3->set('SESSION.arrCountries', $arrCountriesSession);
             $this->f3->set('SESSION.htmlSelectCountries', $htmlSelectCountryOptions);
 

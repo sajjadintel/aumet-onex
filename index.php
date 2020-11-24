@@ -110,9 +110,9 @@ $f3->set('dbConnStringOnEx', "mysql:host=$dbHost;port=$dbPort;dbname=onex");
 global $dbConnectionAuth;
 
 $dbConnectionAuth = new DB\SQL(
-    $f3->get('dbConnStringAuth'),
-    $f3->get('dbUsername'),
-    $f3->get('dbPassword'),
+    $f3->get('dbConnStringAumet'),
+    $f3->get('dbPGUsername'),
+    $f3->get('dbPGPassword'),
     array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION)
 );
 
