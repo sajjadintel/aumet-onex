@@ -38,7 +38,18 @@ class BaseModel extends DB\SQL\Mapper
             $this->load(array(), array('order' => $order, 'limit' => $limit, 'offset' => $offset));
         }
 
-        return $this->query;
+        if(!$this->dry()) {
+            if(count($this->query) == 1)
+                return BaseModel::toObject($this->query[0]);
+            else {
+                return array_map(function ($obj) {
+                    return BaseModel::toObject($obj);
+                }, $this->query);
+            }
+        }
+        else {
+            return [];
+        }
     }
 
     function mapArrayToObject($array, &$obj)
@@ -107,7 +118,13 @@ class BaseModel extends DB\SQL\Mapper
         }
 
         if(!$this->dry()) {
-            return BaseModel::toObject($this->query[0]);
+            if(count($this->query) == 1)
+                return BaseModel::toObject($this->query[0]);
+            else {
+                return array_map(function ($obj) {
+                    return BaseModel::toObject($obj);
+                }, $this->query);
+            }
         }
         else {
             return null;

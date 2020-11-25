@@ -32,7 +32,7 @@ $f3->set('ENCODING', 'UTF-8');
 
 $f3->set('CACHE','redis=localhost');
 
-$f3->set('AUMET_CACHE', FALSE);
+$f3->set('AUMET_CACHE', TRUE);
 
 $f3->set('rootDIR', dirname(__FILE__));
 

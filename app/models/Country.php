@@ -7,11 +7,11 @@ class Country extends BaseModel
     {
         global $dbConnectionAumet;
 
-        parent::__construct($dbConnectionAumet, 'public.countries');
+        parent::__construct($dbConnectionAumet, 'setup.Country');
     }
 
-    public function getByUID($uid)
+    public function getById($id)
     {
-        return parent::getByField('uid', $uid);
+        return parent::getByField('"ID"', $id);
     }
 }

@@ -40,6 +40,7 @@ $f3->route('GET /@language/demo/set/@companyId', 'DemoController->getSetDemoComp
 $f3->route('POST /@language/demo/setup', 'DemoController->postSetupDemoCompany');
 
 $f3->route('GET /@language/profile/countries/targeted', 'ProfileController->getTargetedCountries');
+$f3->route('POST /@language/profile/countries/targeted', 'ProfileController->postTargetedCountries');
 
 // Calls
 $f3->route('GET /@language/calls', 'CallController->get');

@@ -56,10 +56,10 @@
 
                             <div class="card-label">
                                 <span class="font-size-h5"><?php echo $objCompany->Name?></span>
-                                <div class="mt-4 font-size-h6"><?php echo $objCountry->country?>
-                                    <?php if($objCountry->flag != ""): ?>
+                                <div class="mt-4 font-size-h6"><?php echo $objCountry->Name?>
+                                    <?php if($objCountry->FlagPath != ""): ?>
                                     <div class="symbol symbol-20 ml-2">
-                                        <img alt="Pic" src="/theme/assets/media/svg/flags/<?php echo $objCountry->flag?>">
+                                        <img alt="Pic" src="<?php echo $objCountry->FlagPath?>">
                                     </div>
                                     <?php endif; ?>
                                 </div>
