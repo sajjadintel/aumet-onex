@@ -140,7 +140,18 @@ class BaseModel extends DB\SQL\Mapper
         } else {
             $this->load(array($where), array('order' => $order, 'limit' => $limit, 'offset' => $offset));
         }
-        return $this->query;
+        if(!$this->dry()) {
+            if(count($this->query) == 1)
+                return BaseModel::toObject($this->query[0]);
+            else {
+                return array_map(function ($obj) {
+                    return BaseModel::toObject($obj);
+                }, $this->query);
+            }
+        }
+        else {
+            return null;
+        }
     }
 
     public function findWhere($where, $order = "", $limit = 0, $offset = 0)

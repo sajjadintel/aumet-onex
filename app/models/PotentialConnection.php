@@ -14,4 +14,9 @@ class PotentialConnection extends BaseModel
     {
         return parent::getWhere('"companyId"='.$companyId.' and "connectionStatusId"=1 and "CountryID"='.$countryId);
     }
+
+    public function getPotentialConnection($companyId, $connectedCompanyId)
+    {
+        return parent::getWhere('"companyId"='.$companyId.' and "ID"='.$connectedCompanyId);
+    }
 }
