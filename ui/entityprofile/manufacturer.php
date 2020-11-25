@@ -196,10 +196,10 @@
                                 <div class="d-flex flex-wrap mb-4">
 
                                     <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                                        <?php echo $objCountry->country?>
-                                        <?php if($objCountry->flag != ""): ?>
+                                        <?php echo $objCountry->Name?>
+                                        <?php if($objCountry->FlagPath != ""): ?>
                                             <div class="symbol symbol-20 ml-2">
-                                                <img alt="Pic" src="/theme/assets/media/svg/flags/<?php echo $objCountry->flag?>">
+                                                <img alt="Pic" src="<?php echo $objCountry->FlagPath?>">
                                             </div>
                                         <?php endif; ?>
                                     </a>

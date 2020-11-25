@@ -16,6 +16,8 @@ class AumetCompany
 
     public $objCountry;
 
+    public $arrTargetedCountries;
+
     public function loadById($companyId){
 
         global $dbConnectionAumet;
@@ -69,9 +71,10 @@ class AumetCompany
             $this->arrProducts[] = $objProduct;
         }
 
-        $dbCountry = new BaseModel($dbConnectionAumet, 'public.countries');
-        $this->objCountry = $dbCountry->getByField('"id"', $this->objCompany->CountryID );
+        $dbCountry = new BaseModel($dbConnectionAumet, 'setup.Country');
+        $this->objCountry = $dbCountry->getByField('"ID"', $this->objCompany->CountryID );
 
+        $this->arrTargetedCountries = (new CompanyTargetCountry())->getByCompanyId($this->objCompany->ID);
         return true;
     }
 
@@ -83,6 +86,18 @@ class AumetCompany
         $f3->set('SESSION.arrScientificNames', $this->arrProspectedCompanyScientificNames);
         $f3->set('SESSION.arrSpecialities', $this->arrSpecialities);
         $f3->set('SESSION.arrProducts', $this->arrProducts);
+        $f3->set('SESSION.arrTargetedCountries', $this->arrTargetedCountries);
+    }
+
+    public function clearSession(){
+        $f3 = \Base::instance();
+        $f3->clear('SESSION.objCompany');
+        $f3->clear('SESSION.objCountry');
+        $f3->clear('SESSION.objProspectedCompany');
+        $f3->clear('SESSION.arrScientificNames');
+        $f3->clear('SESSION.arrSpecialities');
+        $f3->clear('SESSION.arrProducts');
+        $f3->clear('SESSION.arrTargetedCountries');
     }
 
     public function loadFromSession(){

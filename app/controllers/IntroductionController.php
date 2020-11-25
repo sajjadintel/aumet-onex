@@ -22,9 +22,7 @@ class IntroductionController extends Controller
             $objSubscription = (new Subscription())->getByCompany($this->objCompany->ID);
             $this->f3->set('objSubscription', $objSubscription);
 
-            $dbCountry = new BaseModel($dbConnectionAumet, 'setup.Country');
-            $objCountry = BaseModel::toObject($dbCountry->getWhere('"ID" = ' . $countryId)[0]);
-            $this->f3->set('objCountry', $objCountry);
+            $this->f3->set('objCountry', (new Country())->getById($countryId));
 
             $dbDistributor = new BaseModel($dbConnectionAumet, 'production.Company');
             $objDistributor = BaseModel::toObject($dbDistributor->getWhere('"ID" = ' . $companyId)[0]);
@@ -102,9 +100,7 @@ class IntroductionController extends Controller
             $objDistributor->objUser = (new AumetUser())->getOneByCompanyId($objDistributor->ID);
             $this->f3->set('objDistributor', $objDistributor);
 
-            $dbCountry = new BaseModel($dbConnectionAumet, 'setup.Country');
-            $objCountry = BaseModel::toObject($dbCountry->getWhere('"ID" = ' . $objDistributor->CountryID)[0]);
-            $this->f3->set('objCountry', $objCountry);
+            $this->f3->set('objCountry', (new Country())->getById($objDistributor->CountryID));
 
             $this->webResponse->setData(View::instance()->render("introductions/viewIntroduction.php"));
             echo $this->webResponse->getJSONResponse();

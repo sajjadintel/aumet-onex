@@ -41,19 +41,11 @@ class PotentialDistributorController extends Controller
 
             global $dbConnectionAumet;
 
-            $arrCountryIds = [1,2,3,4,14,6,7, 40, 55];
+            $vwRegionCountryDistributorCount = new CompanyRegionCountryDistributorCount();
+            $arrTemp = $vwRegionCountryDistributorCount->getByCompanyId($this->objCompany->ID);
 
-            foreach ($this->arrTargetedCountries as $key => $obj) {
-                //$arrCountryIds[] = $key;
-            }
-
-            $vwRegionCountryDistributorCount = new BaseModel($dbConnectionAumet, 'onex.vwRegionCountryDistributorCount');
-            $arrTemp = $vwRegionCountryDistributorCount->getWhere('"CountryID" in (' . implode(',',$arrCountryIds).')');
-            $arrRegionCountryDistributorCount = [];
             $arrRegions = [];
-            foreach ($arrTemp as $objCountryTemp) {
-                $objCountry = BaseModel::toObject($objCountryTemp);
-
+            foreach ($arrTemp as $objCountry) {
                 if(!array_key_exists($objCountry->RegionID, $arrRegions)) {
                     $arrRegions[$objCountry->RegionID] = new stdClass();
                     $arrRegions[$objCountry->RegionID]->id = $objCountry->RegionID;
@@ -78,19 +70,11 @@ class PotentialDistributorController extends Controller
         if (!$this->f3->ajax()) {
             $this->renderLayout("potentialdistributors/country/$countryId");
         } else {
+            $this->f3->set('objSubscription', (new Subscription())->getByCompany($this->objCompany->ID));
 
-            global $dbConnectionAumet;
+            $this->f3->set('objCountry', (new Country())->getById($countryId));
 
-            $objSubscription = (new Subscription())->getByCompany($this->objCompany->ID);
-            $this->f3->set('objSubscription', $objSubscription);
-
-            $dbCountry = new BaseModel($dbConnectionAumet, 'setup.Country');
-            $objCountry = $dbCountry->getByField('"ID"', $countryId);
-            $this->f3->set('objCountry', $objCountry);
-
-            $dbDistributors = new BaseModel($dbConnectionAumet, 'onex.vwPotentialConnections');
-            $arrDistributors = $dbDistributors->getWhere('"companyId"='.$this->objCompany->ID.' and "connectionStatusId"=1 and "CountryID"='.$countryId);
-            $this->f3->set('arrDistributors', $arrDistributors);
+            $this->f3->set('arrDistributors', (new PotentialConnection())->getByAvailableConnectionsByCountry($this->objCompany->ID, $countryId));
 
             $this->webResponse->setData(View::instance()->render("potentialdistributors/byCountry.php"));
 
