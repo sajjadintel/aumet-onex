@@ -17,6 +17,12 @@ class PotentialConnection extends BaseModel
 
     public function getPotentialConnection($companyId, $connectedCompanyId)
     {
-        return parent::getWhere('"companyId"='.$companyId.' and "ID"='.$connectedCompanyId);
+        $arr = parent::getWhere('"companyId"='.$companyId.' and "ID"='.$connectedCompanyId);
+        if(count($arr) > 0){
+            return $arr[0];
+        }
+        else {
+            return false;
+        }
     }
 }
