@@ -11,8 +11,9 @@ $f3->route('GET /resources/@type',
 
 $f3->route('GET /@language/@page', 'DemoController->getPage');
 
-$f3->route('GET /', 'LandingController->get');
-$f3->route('GET /@language', 'LandingController->get');
+$f3->route('GET /', 'DashboardController->get');
+$f3->route('GET /@language', 'DashboardController->get');
+$f3->route('GET /@language/dashboard', 'DashboardController->get');
 
 $f3->route('GET /@language/auth/signin', 'AuthController->getSignIn');
 $f3->route('POST /@language/auth/signin', 'AuthController->postSignInWithFirebase');
@@ -41,6 +42,7 @@ $f3->route('POST /@language/demo/setup', 'DemoController->postSetupDemoCompany')
 
 $f3->route('GET /@language/profile/countries/targeted', 'ProfileController->getTargetedCountries');
 $f3->route('POST /@language/profile/countries/targeted', 'ProfileController->postTargetedCountries');
+$f3->route('POST /@language/profile/countries/targeted/@countryId/remove', 'ProfileController->postRemoveTargetedCountry');
 
 // Calls
 $f3->route('GET /@language/calls', 'CallController->get');

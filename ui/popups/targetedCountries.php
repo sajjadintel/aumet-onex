@@ -21,7 +21,8 @@
 <script>
     function fnCallbackEditTargetedCountries(webResponse){
         if(webResponse.errorCode == 0){
-            WebApp.loadPage('potentialdistributors');
+            $("#modalMDStatic").modal("hide");
+            WebApp.loadPartialPage("#potentialCountriesContainer", "potentialdistributors/list");
         }
     }
 </script>

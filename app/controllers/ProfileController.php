@@ -23,7 +23,15 @@ class ProfileController extends Controller
                 $objTargetCountry->add();
             }
         }
-        $this->webResponse->setData($_POST);
+        echo $this->webResponse->getJSONResponse();
+    }
+
+    function postRemoveTargetedCountry(){
+        $targetCountryId = $this->f3->get("PARAMS.countryId");
+        $objTargetCountry = new CompanyTargetCountry();
+        $objTargetCountry->getByPKId($this->objCompany->ID, $targetCountryId);
+        $objTargetCountry->delete();
+        $this->webResponse->setData($targetCountryId);
         echo $this->webResponse->getJSONResponse();
     }
 }

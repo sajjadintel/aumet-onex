@@ -27,6 +27,7 @@ class IntroductionController extends Controller
             $dbDistributor = new BaseModel($dbConnectionAumet, 'production.Company');
             $objDistributor = BaseModel::toObject($dbDistributor->getWhere('"ID" = ' . $companyId)[0]);
             $objDistributor->objUser = (new AumetUser())->getOneByCompanyId($objDistributor->ID);
+            $objDistributor->arrExperience = AumetDBRoutines::getDistributorExperiences($objDistributor->distributorId);
             $this->f3->set('objDistributor', $objDistributor);
 
             $this->webResponse->setData(View::instance()->render("introductions/sendIntroduction.php"));
