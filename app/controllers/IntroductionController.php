@@ -17,16 +17,14 @@ class IntroductionController extends Controller
             $this->renderLayout("potentialdistributors/country/$countryId/sendintroduction/$companyId");
         } else {
 
-            global $dbConnectionAumet;
-
             $objSubscription = (new Subscription())->getByCompany($this->objCompany->ID);
             $this->f3->set('objSubscription', $objSubscription);
 
             $this->f3->set('objCountry', (new Country())->getById($countryId));
 
-            $dbDistributor = new BaseModel($dbConnectionAumet, 'production.Company');
-            $objDistributor = BaseModel::toObject($dbDistributor->getWhere('"ID" = ' . $companyId)[0]);
+            $objDistributor = (new PotentialConnection())->getPotentialConnection($this->objCompany->ID, $companyId);
             $objDistributor->objUser = (new AumetUser())->getOneByCompanyId($objDistributor->ID);
+            $objDistributor->arrExperience = AumetDBRoutines::getDistributorExperiences($objDistributor->distributorId);
             $this->f3->set('objDistributor', $objDistributor);
 
             $this->webResponse->setData(View::instance()->render("introductions/sendIntroduction.php"));
@@ -53,6 +51,11 @@ class IntroductionController extends Controller
                         $dbIntroduction->fromCompanyId = $this->objCompany->ID;
                         $dbIntroduction->toCompanyId = $companyId;
                         $dbIntroduction->addReturnID();
+
+                        $dbPotentialConnectionRecord = new PotentialConnectionRecord();
+                        $dbPotentialConnectionRecord->getPotentialConnection($this->objCompany->ID, $companyId);
+                        $dbPotentialConnectionRecord->statusId=2;
+                        $dbPotentialConnectionRecord->update();
 
                         $dbSubscription->introductions = $dbSubscription->introductions - 1;
                         $dbSubscription->update();
@@ -95,9 +98,9 @@ class IntroductionController extends Controller
             $objSubscription = (new Subscription())->getByCompany($this->objCompany->ID);
             $this->f3->set('objSubscription', $objSubscription);
 
-            $dbDistributor = new BaseModel($dbConnectionAumet, 'production.Company');
-            $objDistributor = BaseModel::toObject($dbDistributor->getWhere('"ID" = ' . $dbIntroduction->toCompanyId)[0]);
+            $objDistributor = (new PotentialConnection())->getPotentialConnection($this->objCompany->ID, $dbIntroduction->toCompanyId);
             $objDistributor->objUser = (new AumetUser())->getOneByCompanyId($objDistributor->ID);
+            $objDistributor->arrExperience = AumetDBRoutines::getDistributorExperiences($objDistributor->distributorId);
             $this->f3->set('objDistributor', $objDistributor);
 
             $this->f3->set('objCountry', (new Country())->getById($objDistributor->CountryID));

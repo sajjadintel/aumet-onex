@@ -15,4 +15,11 @@ class UserController extends Controller
 
       $this->f3->reroute("/web");
   }
+
+  function getOneCompanyUser(){
+      if ($this->f3->ajax()) {
+          $this->webResponse->setData((new AumetUser())->getOneByCompanyId($this->f3->get("PARAMS.companyId")));
+      }
+      echo $this->webResponse->getJSONResponse();
+  }
 }

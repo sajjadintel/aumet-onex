@@ -13,7 +13,6 @@ class Controller
     protected $isOnBoarding;
 
     protected $objCompany;
-    protected $objCompanyProfile;
     protected $objManufacturer;
     protected $objCountry;
     protected $arrProducts;

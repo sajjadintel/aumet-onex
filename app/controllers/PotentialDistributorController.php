@@ -74,12 +74,20 @@ class PotentialDistributorController extends Controller
 
             $this->f3->set('objCountry', (new Country())->getById($countryId));
 
-            $this->f3->set('arrDistributors', (new PotentialConnection())->getByAvailableConnectionsByCountry($this->objCompany->ID, $countryId));
+            $arrDistributors = (new PotentialConnection())->getByAvailableConnectionsByCountry($this->objCompany->ID, $countryId);
+            foreach ($arrDistributors as $objDistributor){
+                $objDistributor->objUser = (new AumetUser())->getOneByCompanyId($objDistributor->ID);
+                $objDistributor->arrExperience = AumetDBRoutines::getDistributorExperiences($objDistributor->distributorId);
+            }
+
+            $this->f3->set('arrDistributors', $arrDistributors);
 
             $this->webResponse->setData(View::instance()->render("potentialdistributors/byCountry.php"));
 
             echo $this->webResponse->getJSONResponse();
         }
     }
+
+
 
 }

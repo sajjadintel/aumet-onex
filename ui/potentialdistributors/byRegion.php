@@ -67,7 +67,7 @@
                                 <tbody>
                                 <?php $countryCounter = 1; ?>
                                 <?php foreach ($objRegion->arrCountries as $objCountry): ?>
-                                <tr>
+                                <tr id="countryRow<?php echo $objCountry->ID; ?>">
                                     <td >
                                         <a href="#" class="d-flex align-items-center">
                                             <div class="symbol symbol-25 mr-3">
@@ -82,7 +82,7 @@
                                     <td><?php echo $objCountry->DistributorsCount; ?></td>
                                     <td><?php echo $objCountry->DistributorsCount; ?></td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-primary mr-2">Remove</a>
+                                        <a class="btn btn-sm btn-outline-primary mr-2" href="javascript:;" onclick="WebApp.post('profile/countries/targeted/<?php echo $objCountry->CountryID; ?>/remove', fnRemoveTargetCountryCallback)">Remove</a>
                                         <a class="btn btn-sm btn-primary" href="javascript:;" onclick="WebApp.loadPage('potentialdistributors/country/<?php echo $objCountry->CountryID; ?>')">View Distributors</a>
                                     </td>
                                 </tr>
@@ -100,3 +100,11 @@
 
     </div>
 <?php endif; ?>
+
+<script>
+    function fnRemoveTargetCountryCallback(webResponse){
+        if(webResponse.errorCode == 0){
+            $('#countryRow'+webResponse.data).fadeOut();
+        }
+    }
+</script>

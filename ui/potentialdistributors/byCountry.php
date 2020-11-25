@@ -87,10 +87,10 @@
 
                                     <div class="d-flex flex-wrap mt-4">
                                         <div class="symbol symbol-50">
-                                            <img alt="Pic" src=" <?php echo $objDistributor->BussinessUserProfileImage != null ? $objDistributor->BussinessUserProfileImage : "/theme/assets/media/users/blank.png"?> ">
+                                            <img alt="Pic" src=" <?php echo $objDistributor->objUser->ProfileImage != null ? $objDistributor->objUser->ProfileImage : "/theme/assets/media/users/blank.png"?> ">
                                         </div>
                                         <div class="ml-4">
-                                            <h6><?php echo $objDistributor->BussinessUserFirstName . " ". $objDistributor->BussinessUserLastName ?></h6>
+                                            <h6><?php echo $objDistributor->objUser->FirstName . " ". $objDistributor->objUser->LastName ?></h6>
                                             <a href="#"
                                                class="text-dark text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                                             <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
@@ -106,7 +106,7 @@
                                             </svg>
 
                                             </span>
-                                                <?php echo $objDistributor->BussinessUserEmail ?></a>
+                                                <?php echo $objDistributor->objUser->Email ?></a>
                                             <a href="#"
                                                class="text-dark text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                                                 <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
@@ -123,7 +123,7 @@
                                                 </g>
                                                 </svg>
 
-                                                </span><?php echo $objDistributor->BussinessUserJobTitle ?></a>
+                                                </span><?php echo $objDistributor->objUser->JobTitle ?></a>
 
                                             <a href="#" class="text-dark text-hover-primary font-weight-bold">
                                                 <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
@@ -196,15 +196,12 @@
                             <div class="d-flex flex-column">
                                 <span class="text-dark-75 font-weight-bolder font-size-h6">Specialized in</span>
                                 <a href="#companyProfileOverView" class="text-primary font-weight-bold">
-                                    <?php $itemsCounter = 0; ?>
-                                    <?php foreach ($_SESSION['arrSpecialities'] as $objItem):?>
-                                        <?php if($itemsCounter < 3): ?>
-                                            <span class="label label-light-dark label-inline mr-1 mb-1"><?php echo $objItem->Name?></span>
-                                        <?php endif; ?>
-                                        <?php $itemsCounter++; ?>
-                                    <?php endforeach; ?>
-                                    <?php if($itemsCounter >= 3): ?>
-                                        <span class="label label-light label-inline"><?php echo "+".($itemsCounter-3); ?></span>
+                                    <?php if(!$objDistributor->arrExperience || count($objDistributor->arrExperience) == 0): ?>
+                                    <span class="font-weight-bolder font-size-h4 text-muted">Not Available<span>
+                                    <?php else: ?>
+                                        <?php foreach ($objDistributor->arrExperience as $objItem):?>
+                                            <span class="label label-light-dark label-inline mr-1 mb-1"><?php echo $objItem['SpecialityName']; ?></span>
+                                        <?php endforeach; ?>
                                     <?php endif; ?>
                                 </a>
                             </div>

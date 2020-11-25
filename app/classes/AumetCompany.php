@@ -31,6 +31,8 @@ class AumetCompany
             return false;
         }
 
+        $this->arrProducts = AumetDBRoutines::getManufacturerProductsByCompanyId($companyId);
+
         $dbProspectedCompanyScientificNames = new BaseModel($dbConnectionAumet, 'production.ProspectedCompanyScientificName');
         $arrTempProspectedCompanyScientificNames = $dbProspectedCompanyScientificNames->getWhere('"ProspectedCompanyID" = ' . $this->objCompany->ProspectedCompanyID);
         $this->arrProspectedCompanyScientificNames = [];
@@ -57,6 +59,9 @@ class AumetCompany
             $this->arrSpecialities[$objTemp->ID] = $obj;
         }
 
+
+
+        /*
         $dbProducts = new BaseModel($dbConnectionAumet, 'public.products');
         $arrTempProducts = $dbProducts->getWhere('"manufacturerId" = ' . $companyId);
         $this->arrProducts = [];
@@ -69,7 +74,7 @@ class AumetCompany
                 $objProduct->specialityName = $objProductTemp->specialityId;
             }
             $this->arrProducts[] = $objProduct;
-        }
+        }*/
 
         $dbCountry = new BaseModel($dbConnectionAumet, 'setup.Country');
         $this->objCountry = $dbCountry->getByField('"ID"', $this->objCompany->CountryID );
