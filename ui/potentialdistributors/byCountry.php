@@ -200,7 +200,7 @@
                                     <span class="font-weight-bolder font-size-h4 text-muted">Not Available<span>
                                     <?php else: ?>
                                         <?php foreach ($objDistributor->arrExperience as $objItem):?>
-                                            <span class="label label-light-dark label-inline mr-1 mb-1"><?php echo $objItem->SpecialityName?></span>
+                                            <span class="label label-light-dark label-inline mr-1 mb-1"><?php echo $objItem['SpecialityName']; ?></span>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </a>
