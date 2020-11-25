@@ -141,16 +141,12 @@ class BaseModel extends DB\SQL\Mapper
             $this->load(array($where), array('order' => $order, 'limit' => $limit, 'offset' => $offset));
         }
         if(!$this->dry()) {
-            if(count($this->query) == 1)
-                return BaseModel::toObject($this->query[0]);
-            else {
-                return array_map(function ($obj) {
-                    return BaseModel::toObject($obj);
-                }, $this->query);
-            }
+            return array_map(function ($obj) {
+                return BaseModel::toObject($obj);
+            }, $this->query);
         }
         else {
-            return null;
+            return [];
         }
     }
 
